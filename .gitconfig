@@ -1,0 +1,52 @@
+[user]
+  # you probably want to change this bit.
+  name = Xiuyu Li
+  email = nickleefly@gmail.com
+  signingkey = 0x71982FE6
+[alias]
+  cl = log --graph --pretty=format:'%h%d %s (%an)'
+  ci = commit
+  st = status
+  br = branch
+  co = checkout
+  cp = cherry-pick
+  df = diff
+  lg = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%an%d%Creset %s %Cgreen(%cr)%Creset' --date=relative
+  ll = log --first-parent --pretty=format:'%h %s'
+  lo = log --oneline
+  authors = log --pretty=format:'%an <%ae>'
+  dif = diff
+  di = diff
+  dff = diff
+  pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
+[branch.master]
+  mergeoptions = log
+[color]
+  grep = auto
+  branch = auto
+  diff = auto
+  status = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+[difftool]
+  prompt = false
+[diff]
+  tool = vimdiff
+[merge]
+  tool = vimdiff
+[push]
+  default = current
+[core]
+  excludesfile = /Users/nick/.gitignore
+[github]
+  user = nickleefly
