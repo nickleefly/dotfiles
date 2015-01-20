@@ -29,7 +29,7 @@ if [ "${BASH_EXTRAS_LOADED}" = "" ] && [ "$TERM_PROGRAM" != "DTerm" ] && [ "$PS1
   echo "loading bash extras..."
 fi
 
-export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2376
+export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375
 export DOCKER_CERT_PATH=/Users/nick/.boot2docker/certs/boot2docker-vm
 export DOCKER_TLS_VERIFY=1
 
