@@ -143,6 +143,8 @@ echo_error () {
 }
 
 alias nodee=node
+alias ndoe=node
+alias gos=go-search
 
 # Go up N directories
 up() {
