@@ -1,0 +1,6 @@
+.netrwhist
+tmp
+snippets
+.VimballRecord
+*.swp
+bundle/YouCompleteMe

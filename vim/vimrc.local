@@ -1,0 +1,104 @@
+set mouse=a
+set ruler
+set term=xterm-256color
+color fruit
+color camo
+color desertEx
+
+" color ironman
+" sy off
+
+" when using a projector, use a light color scheme and no syntax
+function Pres ()
+  :colorscheme dawn
+  :syntax off
+endfunction
+map <Leader>pres :call Pres()<CR>
+
+set nohls
+
+set hls
+noremap <Leader><Space> :noh<CR>:call clearmatches()<CR>
+
+" map <Leader>. :tabn<CR>
+
+" this makes it use the system clipboard
+" whenever yanking to the "unnamed" register.
+set clipboard=unnamed
+
+set wrap
+set modelines=0
+set tabstop=2
+set expandtab
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+set cul
+set nocul
+set ttyfast
+set autoindent
+set showmode
+set showcmd
+set visualbell
+nnoremap / /\v
+vnoremap / /\v
+if exists("&colorcolumn")
+  set colorcolumn=80
+endif
+nnoremap j gj
+nnoremap k gk
+
+" make xX use the "x" register, rather than the default register
+" d already deletes and yanks to the default register
+noremap x "xx
+noremap X "xX
+
+" make cC yank to the "c" register.
+" it's rare that you want to correct and then re-paste, but possible.
+noremap c "cc
+noremap C "cC
+
+" this bit makes Q, W and WQ work just like their lowercase counterparts
+com -bang Q q<bang>
+com -bang W w<bang> <args>
+com -bang WQ wq<bang> <args>
+com -bang Wq wq<bang> <args>
+
+" super annoying typos if you maintain a pacakge manager
+iab pacakges packages
+iab pacakge package
+iab verison version
+iab verisons versions
+iab nodE_modules node_modules
+iab teh the
+iab hte the
+iab wiht with
+iab eaisly easily
+iab ofr for
+
+" shift to move the window, not the cursor.
+inoremap JJJJ <Esc><C-e><C-e><C-e>
+inoremap KKKK <Esc><C-y><C-y><C-y>
+inoremap HHHH <Esc>zhzhzhzhzhzh
+inoremap LLLL <Esc>zlzlzlzlzlzl
+map J <C-e>
+map K <C-y>
+map H zhzh
+map L zlzl
+
+" control to switch windows
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-h> <C-w>h
+map <C-l> <C-w>l
+
+" f1, you are my nemesis.
+map <F1> <Esc>
+imap <F1> <Esc>
+
+" escape is so far away
+noremap <Leader>m <Esc>
+inoremap <Leader>m <Esc>
+
+au BufNewFile,BufRead *.ejs set filetype=ejs
+au BufNewFile,BufRead *.ejs so $HOME/.vim/syntax/jst.vim
