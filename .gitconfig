@@ -4,21 +4,44 @@
   email = nickleefly@gmail.com
   signingkey = 0x71982FE6
 [alias]
-  cl = log --graph --pretty=format:'%h%d %s (%an)'
   ci = commit
   st = status
   br = branch
   co = checkout
   cp = cherry-pick
   df = diff
-  lg = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%an%d%Creset %s %Cgreen(%cr)%Creset' --date=relative
-  ll = log --first-parent --pretty=format:'%h %s'
+  ps = push
+  pl = pull
+  pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
+  cl = log --graph --pretty=format:'%h%d %s (%an)'
   lo = log --oneline
   authors = log --pretty=format:'%an <%ae>'
-  dif = diff
-  di = diff
-  dff = diff
-  pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
+  dc = diff --cached
+  lp = log -p
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  lol = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lola = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+  showtagbydate = log --tags --simplify-by-decoration --pretty='format:%ai %d'
+  tagcommit = !sh -c 'git rev-list $0 | head -n 1'
+  uncommit = reset --soft HEAD^
+  unstage = reset HEAD
+  back = reset HEAD^ --hard
+  age=!echo "First commit:" && git log --reverse --pretty=format:'\t\t%ar' | head -n 1 && echo 'Last commit:' && git log --pretty=format:'\t\t%ar' | head -n 1
+  ff = merge --ff-only
+  ls = ls-files
+  ra = "!f() { git remote add $1 https://github.com/$2.git; }; f"
+
+  ; Regular pull/push from upstream repositories
+  pup = "!git pull upstream master && git push"
+
+  ; Shortcut for git fetch and ff
+  fff = "!git fetch && git ff $1"
+
+  ; Show files ignored by git
+  ign = ls-files -o -i --exclude-standard
+
+  ; Update all the submodules to the latest version
+  pullsub = submodule foreach git pull
 [branch.master]
   mergeoptions = log
 [color]

@@ -1,8 +1,11 @@
 
 # how to install
 
-
-    ./installsh
+```
+git submodule init
+git submodule update
+./install.sh
+```
 
 
 Released under the DWTFPL
