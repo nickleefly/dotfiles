@@ -2,8 +2,6 @@
 # how to install
 
 
-    git submodule init
-    git submodule update
     ./installsh
 
 
