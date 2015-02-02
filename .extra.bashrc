@@ -46,7 +46,6 @@ export HOSTNAME
 alias z='date -u "+%Y-%m-%dT%H:%M:%SZ"'
 alias dc='cd ~/Documents'
 alias dl='cd ~/Downloads'
-alias irc='dtach -a irssi-session'
 alias japan='ssh nick@54.65.31.223 -L 1194:localhost:1194'
 alias dp='cd ~/Dropbox'
 alias enpm='npm --registry http://registry.npmjs.eu/'

@@ -100,3 +100,6 @@
 [submodule "vim/bundle/vim-json"]
 	path = vim/bundle/vim-json
 	url = https://github.com/elzr/vim-json
+[submodule "vim/bundle/vim-jst"]
+	path = vim/bundle/vim-jst
+	url = https://github.com/briancollins/vim-jst.git
