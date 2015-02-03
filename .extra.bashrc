@@ -43,7 +43,7 @@ JS
 # Why this is not exported in OS X, I have no idea
 export HOSTNAME
 
-alias z='date -u "+%Y-%m-%dT%H:%M:%SZ"'
+alias now='date -u "+%Y-%m-%dT%H:%M:%SZ"'
 alias dc='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias japan='ssh nick@54.65.31.223 -L 1194:localhost:1194'

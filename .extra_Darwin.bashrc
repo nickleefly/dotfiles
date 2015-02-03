@@ -1,18 +1,11 @@
 # commands that only get loaded on the Darwin platform.
 # Mostly, these commands interact with specific Mac programs.
 
-alias compressmail='sqlite3 ~/Library/Mail/Envelope\ Index vacuum index'
-
-[ $(basename "$EDITOR") == "mate_wait" ] && export LESSEDIT='mate_wait -l %lm %f'
 
 sethost () {
 	sudo hostname sistertrain-lm
 	sudo scutil --set LocalHostName sistertrain-lm
 	sudo scutil --set HostName sistertrain-lm
-}
-
-ahyaneupdate () {
-	fh '. ~/.extra.bashrc; cd dev/ahyane; agent; git fetch; git rebase origin/master; bin/build.php'
 }
 
 alias photoshop='open -a /Applications/Adobe\ Photoshop\ CC/Adobe\ Photoshop\ CC.app'
@@ -55,7 +48,4 @@ update_webkit () {
 
 	return $ret
 }
-
-export QTDIR=/opt/local/lib/qt3
-
 
