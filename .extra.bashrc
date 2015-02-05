@@ -189,6 +189,26 @@ if ! [ -z "$BASH" ]; then
     checkhash extglob globstar extdebug dirspell
 fi
 
+# A little hack to add forward-and-back traversal with cd
+if inpath php && inpath godir.php; then
+  c () {
+    local a
+    alias cd="cd"
+    a="$(godir.php "$@")"
+    [ "$a" != "" ] && eval $a
+    [ -f .DS_Store ] && rm .DS_Store
+    alias cd="c"
+  }
+  alias cd="c"
+  alias ..="c .."
+  alias -- -="c -1"
+  alias -- _="c +1"
+  alias s="c --show"
+else
+  alias ..="cd .."
+  alias -- -="cd -"
+fi
+
 # chooses the first argument that matches a file in the path.
 choose_first () {
   for i in "$@"; do
