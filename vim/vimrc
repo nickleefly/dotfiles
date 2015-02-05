@@ -6,6 +6,7 @@ let mapleader=","
 execute pathogen#infect()
 
 set number
+set relativenumber
 set ruler
 syntax on
 
@@ -21,6 +22,7 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
+noremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 " Invisible characters
 autocmd BufEnter * set listchars=tab:▸\ ,eol:¬
@@ -34,10 +36,19 @@ set laststatus=2
 
 " NERDTree configuration
 let NERDTreeIgnore=['\.rbc$', '\~$']
+" Nerd Tree (toggle)
 map <Leader>n :NERDTreeToggle<CR>
+" Nerd Tree (reveal current file)
+map <Leader>f :NERDTreeFind<CR>
+" Close Nerdtree when selecting a file
+let NERDTreeQuitOnOpen=1
+
 
 " ZoomWin configuration
 map <Leader>z :ZoomWin<CR>
+
+" Edit user .vimrc
+map <Leader>v :e ~/.vimrc<CR>
 
 " CTags
 map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
@@ -121,5 +132,16 @@ au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
 " remap Tab to Ctrl n for snipmate
-ino <c-n> <c-r>=TriggerSnippet()<cr>
-snor <c-n> <esc>i<right><c-r>=TriggerSnippet()<cr>
+ino <c-t> <c-r>=TriggerSnippet()<cr>
+snor <c-t> <esc>i<right><c-r>=TriggerSnippet()<cr>
+
+" Do not create swap files, we're using git after all
+set nobackup
+set nowritebackup
+set noswapfile
+
+" CtrlP
+let g:ctrlp_dont_split = 'NERD_tree_2'
+let g:ctrlp_working_path_mode = ''
+let g:ctrlp_mruf_relative = 1
+nmap <Leader>p :CtrlPMRU<CR>
