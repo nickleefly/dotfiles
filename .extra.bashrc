@@ -1,6 +1,6 @@
 #!/bin/bash
 ######
-# .extra.bashrc - Isaac's Bash Extras
+# .extra.bashrc - Xiuyu's Bash Extras
 # This file is designed to be a drop-in for any machine that I log into.
 # Currently, that means it has to work under Darwin, Ubuntu, and yRHEL
 #
@@ -119,14 +119,6 @@ __set_path PATH "$HOME/bin:$HOME/local/nodejs/bin:/opt/nodejs/bin:/opt/local/gcc
 if [ -d "$HOME/Library/Application Support/TextMate/Support/bin" ]; then
   export PATH=$PATH:"$HOME/Library/Application Support/TextMate/Support/bin"
 fi
-
-#__set_path LD_LIBRARY_PATH "$(__form_paths lib)"
-unset LD_LIBRARY_PATH
-__set_path PKG_CONFIG_PATH "$(__form_paths lib/pkgconfig):/usr/X11/lib/pkgconfig:/opt/gnome-2.14/lib/pkgconfig"
-
-__set_path CLASSPATH "./:$HOME/dev/js/rhino/build/classes:$HOME/dev/yui/yuicompressor/src"
-__set_path CDPATH ".:..:$HOME/dev:$HOME/dev/js:$HOME/dev/joyent:$HOME"
-__set_path PYTHONPATH "$HOME/dev/js/node/deps/v8/tools/:$HOME/dev/js/node/tools"
 
 # fail if the file is not an executable in the path.
 inpath () {
