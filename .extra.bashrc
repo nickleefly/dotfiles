@@ -345,11 +345,6 @@ elif inpath apt-get; then
   alias upup="sudo apt-get update && sudo apt-get upgrade"
 fi
 
-# git stuff
-export MANTA_KEY_ID="66:f2:21:3d:82:a8:21:f7:85:50:60:0b:5a:5e:82:f5"
-export MANTA_URL=https://us-east.manta.joyent.com
-export MANTA_USER=NodeCore
-
 export GITHUB_TOKEN=$(git config --get github.token)
 export GITHUB_USER=$(git config --get github.user)
 export GIT_COMMITTER_NAME=${GITHUB_USER:-$(git config --get user.name)}
@@ -372,7 +367,6 @@ alias maek="make"
 alias meak="make"
 alias meak="make"
 alias gci-am="git commit -am"
-alias authors="(echo 'Nick Li <nickleefly@gmail.com>'; git authors | grep -v 'nickleefly' | perl -pi -e 's|\([^\)]*\)||g' | sort | uniq)"
 
 gam () {
   if [ $# -eq 0 ]; then

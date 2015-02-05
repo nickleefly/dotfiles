@@ -103,3 +103,6 @@
 [submodule "vim/bundle/vim-jst"]
 	path = vim/bundle/vim-jst
 	url = https://github.com/briancollins/vim-jst.git
+[submodule "z"]
+	path = z
+	url = https://github.com/rupa/z.git

@@ -7,3 +7,4 @@ fi
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
+. ~/z/z.sh
