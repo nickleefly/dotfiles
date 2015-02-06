@@ -4,4 +4,3 @@ if [ "$PS1" != "" ]; then
 fi
 source ~/.nvm/nvm.sh
 export PATH=$HOME/local/bin:$PATH
-. .docker.bash
