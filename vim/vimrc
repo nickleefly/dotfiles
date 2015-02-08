@@ -108,6 +108,8 @@ if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
 cmap w!! w !sudo tee > /dev/null %
+" Fast saving
+nmap <Leader>w :w!<cr>
 
 " ------------------------------------------------------------------------------
 " snipmate
