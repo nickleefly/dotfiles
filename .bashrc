@@ -19,11 +19,3 @@ function cleanfile () {
       rm $bkfile
   fi
 }
-
-function cd() {
-  builtin cd ${1:-$HOME } && ls;
-}
-
-function mkdircd() {
-  mkdir -p "$@" && eval cd "\"\$$#\"";
-}
