@@ -8,4 +8,3 @@ export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 export PATH=~/npm-global/bin:$PATH
-. ~/z/z.sh

@@ -19,3 +19,6 @@ function cleanfile () {
       rm $bkfile
   fi
 }
+
+_Z_NO_PROMPT_COMMAND=1
+. ~/z/z.sh
