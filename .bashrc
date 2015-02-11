@@ -20,5 +20,7 @@ function cleanfile () {
   fi
 }
 
+export HISTIGNORE="cd [a-zA-Z0-9_.*]*:mv [a-zA-Z0-9_.*]*"
+
 _Z_NO_PROMPT_COMMAND=1
 . ~/z/z.sh
