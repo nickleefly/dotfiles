@@ -73,3 +73,5 @@
   excludesfile = /Users/nick/.gitignore
 [github]
   user = nickleefly
+[remote "origin"]
+	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
