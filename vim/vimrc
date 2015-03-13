@@ -156,3 +156,4 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 nnoremap <leader>h :split<enter>
 nnoremap <leader>v :vsplit<enter>
+nnoremap <F5> :UndotreeToggle<cr>
