@@ -48,7 +48,7 @@ let NERDTreeQuitOnOpen=1
 map <Leader>z :ZoomWin<CR>
 
 " Edit user .vimrc
-map <Leader>v :e ~/.vimrc<CR>
+map <Leader>r :e ~/.vimrc<CR>
 
 " CTags
 map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
@@ -156,4 +156,4 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 nnoremap <leader>h :split<enter>
 nnoremap <leader>v :vsplit<enter>
-nnoremap <F5> :UndotreeToggle<cr>
+let g:AutoPairsMultilineClose=0
