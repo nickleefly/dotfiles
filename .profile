@@ -4,6 +4,7 @@ if [ -n "$BASH_VERSION" ]; then
 	[ -f ~/.extra.bashrc ] && . ~/.extra.bashrc
 fi
 
+export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
