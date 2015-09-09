@@ -9,6 +9,8 @@ sethost () {
 }
 
 alias photoshop='open -a /Applications/Adobe\ Photoshop\ CC/Adobe\ Photoshop\ CC.app'
+alias chrome='open -a "Google Chrome"'
+alias safari='open -a "Safari"'
 
 update_webkit () {
 	local rev=$( cat /Applications/WebKit.app/Contents/Resources/VERSION )
