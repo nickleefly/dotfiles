@@ -6,6 +6,7 @@ fi
 
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
+export GOBIN=$HOME/go/bin
+export PATH=$GOROOT/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
 export PATH=~/npm-global/bin:$PATH
