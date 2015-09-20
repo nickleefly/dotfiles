@@ -630,7 +630,7 @@ macs () {
 # set the bash prompt and the title function
 
 
-if [ "$PROMPT_COMMAND" = "" ]; then
+if [ "$PROMPT_COMMAND" = "" ] || [ "$PROMPT_COMMAND" = "__prompt" ]; then
   __prompt () {
     echo -ne "\033[m";history -a
     echo ""

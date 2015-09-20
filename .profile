@@ -10,3 +10,4 @@ export GOBIN=$HOME/go/bin
 export PATH=$GOROOT/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 export PATH=~/npm-global/bin:$PATH
+export N_PREFIX=$HOME/.n
