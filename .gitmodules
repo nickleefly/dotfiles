@@ -115,3 +115,6 @@
 [submodule "vim/bundle/ZoomWin"]
 	path = vim/bundle/ZoomWin
 	url = https://github.com/vim-scripts/ZoomWin.git
+[submodule "vim/bundle/vim-gocode"]
+	path = vim/bundle/vim-gocode
+	url = https://github.com/Blackrush/vim-gocode.git
