@@ -110,7 +110,7 @@ endif
 cmap w!! w !sudo tee > /dev/null %
 " Fast saving
 nmap <Leader>w :w!<cr>
-nmap <Space><Space> :wq!<cr>
+nmap .<Leader> :wq!<cr>
 
 " ------------------------------------------------------------------------------
 " snipmate
