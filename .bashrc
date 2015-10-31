@@ -4,6 +4,25 @@ if [ "$PS1" != "" ]; then
 fi
 source ~/.nvm/nvm.sh
 export PATH=$HOME/local/bin:$PATH
+export PATH=~/npm-global/bin:$PATH
+
+function mkdir()
+{
+  command mkdir $1 && cd $1
+}
+
+function x () {
+  local dir
+  dir=$(ls -R | grep '[a-zA-Z0-9]:' | sed 's/://g' | fzf +m) &&
+  cd "$dir"
+}
+
+function f () {
+  find . -name '.git' -type d -prune -o -type f -print0 |\
+  xargs -0 grep --color -n -H "$1" |\
+  awk '{split($0,a,":"); printf("\033[1;33m%s\033[m: %s\n\033[1;31m%s\033[m\n\n", a[2], a[1], a[3]) }' |\
+  less -R
+}
 
 function cleanfile () {
   if [ -z "$1" ]; then

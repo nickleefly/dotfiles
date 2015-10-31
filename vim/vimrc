@@ -25,7 +25,7 @@ set smartcase
 noremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 " Invisible characters
-autocmd BufEnter * set listchars=tab:▸\ ,eol:¬
+" autocmd BufEnter * set listchars=tab:▸\ ,eol:¬
 
 " Tab completion
 set wildmode=list:longest,list:full

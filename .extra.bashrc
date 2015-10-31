@@ -48,9 +48,32 @@ alias dc='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias dp='cd ~/Dropbox'
 alias enpm='npm --registry http://registry.npmjs.eu/'
-alias cnpm="npm --registry=https://registry.npm.taobao.org \
-  --disturl=https://npm.taobao.org/dist"
+alias cnpm="npm --registry=https://registry.npm.taobao.org --disturl=https://npm.taobao.org/dist"
 alias h='history'
+alias ndoe=node
+alias gos=go-search
+alias md="open /Users/nick/Applications/MacDown.app"
+alias n=npm
+alias np=npm
+alias nt="npm test"
+alias np="npm prefix"
+alias nr="npm root"
+alias ngr="npm root -g"
+alias ngp="npm prefix -g"
+alias cdnp='cd $(npm prefix -g)'
+alias gci="git commit"
+alias gap="git add -p"
+alias gst="git status -s -uno"
+alias glg="git lg"
+alias gti="git"
+alias maek="make"
+alias meak="make"
+alias meak="make"
+alias gci-am="git commit -am"
+alias authors="(echo 'Xiuyu Li <nickleefly@gmail.com>'; git authors | grep -v 'nickleefly' | perl -pi -e 's|\([^\)]*\)||g' 2>/dev/null | sort | uniq)"
+alias gdiff='git diff --no-index --color'
+
+
 # try to avoid polluting the global namespace with lots of garbage.
 # the *right* way to do this is to have everything inside functions,
 # and use the "local" keyword.  But that would take some work to
@@ -117,10 +140,15 @@ export COPYFILE_DISABLE=true
 # homebrew="$HOME/.homebrew"
 local homebrew="/usr/local"
 __garbage homebrew
-__set_path PATH "$HOME/bin:$HOME/local/nodejs/bin:/opt/nodejs/bin:/opt/local/gcc34/bin:$homebrew/share/npm/bin:$(__form_paths bin sbin libexec include):/usr/nodejs/bin/:/usr/local/nginx/sbin:$HOME/dev/js/narwhal/bin:/usr/X11R6/bin:/opt/local/share/mysql5/mysql:/usr/local/mysql/bin:/opt/local/apache2/include:/usr/X11R6/include:$homebrew/Cellar/autoconf213/2.13/bin:/Users/nick/.gem/ruby/1.8/bin:/opt/couchdb-1.0.0/bin:$HOME/dev/riak/rel/riak/bin:/usr/pkg/sbin:/usr/pkg/bin"
+__set_path PATH "$HOME/bin:$HOME/local/nodejs/bin:$homebrew/share/npm/bin:$(__form_paths bin sbin libexec include):/usr/nodejs/bin/:/usr/local/nginx/sbin:/usr/X11R6/bin:/usr/local/mysql/bin:/usr/X11R6/include"
 if [ -d "$HOME/Library/Application Support/TextMate/Support/bin" ]; then
   export PATH=$PATH:"$HOME/Library/Application Support/TextMate/Support/bin"
 fi
+
+#__set_path LD_LIBRARY_PATH "$(__form_paths lib)"
+unset LD_LIBRARY_PATH
+__set_path PKG_CONFIG_PATH "$(__form_paths lib/pkgconfig):/usr/X11/lib/pkgconfig:/opt/gnome-2.14/lib/pkgconfig"
+__set_path CDPATH ".:..:$HOME/dev/npm:$HOME/dev:$HOME/dev/js:$HOME"
 
 # fail if the file is not an executable in the path.
 inpath () {
@@ -134,10 +162,6 @@ echo_error () {
   echo "$@" 1>&2
   return 0
 }
-
-alias nodee=node
-alias ndoe=node
-alias gos=go-search
 
 # Go up N directories
 up() {
@@ -307,7 +331,6 @@ alias lal="$ls_cmd -FLlash"
 alias ll="$ls_cmd -Flsh"
 alias alg="alias | grep"
 alias lg="$ls_cmd -Flash | grep --color"
-alias mou="open /Applications/Mou.app"
 
 export MANPAGER=more
 
@@ -380,16 +403,6 @@ grim () {
   git rebase -i $m
 }
 
-alias gci="git commit"
-alias gap="git add -p"
-alias gst="git status"
-alias glg="git lg"
-alias gti="git"
-alias maek="make"
-alias meak="make"
-alias meak="make"
-alias gci-am="git commit -am"
-
 gam () {
   if [ $# -eq 0 ]; then
     git ci -a
@@ -398,20 +411,20 @@ gam () {
   fi
 }
 
-cpg () {
-  rm *patch
-  git format-patch HEAD^
-  gist *patch | pbcopy
-}
-
-alias gdiff='git diff --no-index --color'
-
-alias pbind="pbpaste | sed 's|^|    |g' | pbcopy"
-alias pbund="pbpaste | sed 's|^    ||g' | pbcopy"
-alias pbtxt="pbpaste | pbcopy"
-pbgist () {
-  pbpaste | gist "$@" | pbcopy
-  pbpaste
+gh () {
+  local r=${1:-"origin"}
+  if [ "$r" == "browse" ]; then
+    r="origin"
+  fi
+  local o=$(git remote -v | grep $r | head -1 | awk '{print $2}')
+  o=${o/git\:\/\//git@}
+  o=${o/:/\/}
+  o=${o/git@/https\:\/\/}
+  local b="$(git branch | grep '\*' | awk '{print $2}')"
+  if [ "$b" != "master" ]; then
+    o=${o}/tree/$b
+  fi
+  open $o
 }
 
 pr () {
@@ -457,8 +470,6 @@ pullup () {
     git pull "$@" && git rebase $me
   fi
 }
-
-
 
 ghadd () {
   local me="$(git config --get github.user)"
@@ -508,16 +519,43 @@ gsh () {
   git rev-list $c^..$c | tee >(xargs echo -n | pbcopy)
 }
 
-npmswitch () {
-  local n1=$1
-  local n2=$2
-  curl -s http://registry.npmjs.org/-/by-user/$n1 \
-  | json $n1 \
-  | json -a \
-  | xargs -I P sh -x -c \
-    'npm cache clean P && \
-     npm owner add '$n2' P && \
-     npm owner rm '$n1' P'
+xyl () {
+  if ! [ -f package.json ]; then
+    echo "Run xyl in a npm project." >&2
+    return 1
+  fi
+
+  cat >LICENSE <<ISC
+The MIT License
+Copyright (c) MIT and Contributors
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ISC
+
+  local current="$(json license < package.json)"
+  if [ "$current" = "MIT" ]; then
+    echo "already MIT" >&2
+    return 0
+  fi
+
+  node -e '
+    j=require("./package.json")
+    j.license = "MIT"
+    console.log(JSON.stringify(j, null, 2))' > package.json.tmp &&\
+  mv package.json.tmp package.json &&\
+  git add package.json LICENSE &&\
+  git commit -m "mit license" &&\
+  npm version patch &&\
+  git push origin master --tags &&\
+  npm publish
 }
 
 npmgit () {
@@ -537,11 +575,6 @@ gv () {
 nsp () {
   npm explore $1 -- git pull origin master
 }
-alias np="npm prefix"
-alias nr="npm root"
-alias ngr="npm root -g"
-alias ngp="npm prefix -g"
-alias cdnp='cd $(npm prefix -g)'
 
 rmnpm () {
   rm -rf /usr/local/{lib/,}{node_modules,node,bin,share/man}/{.npm/,}npm* ~/.npm
@@ -647,8 +680,8 @@ if [ "$PROMPT_COMMAND" = "" ] || [ "$PROMPT_COMMAND" = "__prompt" ]; then
     echo -ne "\033]0;$(__git_ps1 "%s - " 2>/dev/null)host $HOST : dir$DIR\007"
     echo -ne "$(__git_ps1 "\033[41;31m[\033[41;37m%s\033[41;31m]\033[0m" 2>/dev/null)"
     echo -ne "\033[40;37m$USER@\033[42;30m$HOST\033[0m:$DIR"
-    if [ "$NAVE" != "" ]; then echo -ne " \033[44m\033[37m$NAVE\033[0m"
-    else echo -ne " \033[32m$(node -v 2>/dev/null)\033[0m"
+    if [ "$NAVE" != "" ]; then echo -ne " \033[44m\033[37mnode$NAVE\033[0m"
+    else echo -ne " \033[32mnode$(node -v 2>/dev/null)\033[0m"
     fi
   }
   export PROMPT_COMMAND='__prompt'
@@ -740,7 +773,11 @@ machinearch=$(uname -m)
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 [ -f $HOME/etc/bash_completion ] && . $HOME/etc/bash_completion
 inpath "git" && [ -f $HOME/.git-completion ] && . $HOME/.git-completion
-inpath "npm" && . <(npm completion -s)
+if inpath "npm"; then
+  npm completion > .npm-completion.tmp
+  source .npm-completion.tmp
+  rm -f .npm-completion.tmp
+fi
 
 complete -cf sudo
 
