@@ -44,3 +44,5 @@ export HISTIGNORE="cd [a-zA-Z0-9_.*]*:mv [a-zA-Z0-9_.*]*"
 _Z_NO_PROMPT_COMMAND=1
 . ~/z/z.sh
 export ANDROID_HOME=/usr/local/opt/android-sdk
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
