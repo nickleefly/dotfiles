@@ -330,7 +330,6 @@ alias lah="$ls_cmd -Flah"
 alias lal="$ls_cmd -FLlash"
 alias ll="$ls_cmd -Flsh"
 alias alg="alias | grep"
-alias lg="$ls_cmd -Flash | grep --color"
 
 export MANPAGER=more
 
