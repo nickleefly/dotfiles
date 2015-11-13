@@ -17,6 +17,4 @@ for i in .*; do
 	fi
 done
 
-./vim/install.sh
-
 exit 0

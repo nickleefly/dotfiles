@@ -46,3 +46,4 @@ _Z_NO_PROMPT_COMMAND=1
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+alias tmux="tmux -2"
