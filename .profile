@@ -10,4 +10,3 @@ export GOROOT=/usr/local/go
 export GOBIN=$HOME/go/bin
 export PATH=$GOPATH/bin:$PATH
 export PATH=$GOROOT/bin:$PATH
-export N_PREFIX=$HOME/.n
