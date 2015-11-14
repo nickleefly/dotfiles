@@ -6,7 +6,8 @@ fi
 
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
+export GOROOT=/usr/local/go
 export GOBIN=$HOME/go/bin
-export PATH=$GOROOT/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
+export PATH=$GOROOT/bin:$PATH
 export N_PREFIX=$HOME/.n
