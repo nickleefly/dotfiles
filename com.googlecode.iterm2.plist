@@ -28,6 +28,8 @@
 	<true/>
 	<key>CopySelection</key>
 	<true/>
+	<key>Custom Color Presets</key>
+	<dict/>
 	<key>Default Bookmark Guid</key>
 	<string>87C1C944-2E0D-4FBA-AC38-F6DA7D997C06</string>
 	<key>DimBackgroundWindows</key>
@@ -82,8 +84,12 @@
 	<true/>
 	<key>MaxVertically</key>
 	<false/>
+	<key>NSColorPanelMode</key>
+	<string>0</string>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/dev/dotfiles</string>
+	<key>NSNavPanelExpandedSizeForOpenMode</key>
+	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -107,10 +113,17 @@
 	<array/>
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
+	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
+	<dict>
+		<key>TB Is Shown</key>
+		<integer>1</integer>
+	</dict>
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>335 252 228 325 0 0 1366 745 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>386 200 924 485 0 0 1366 745 </string>
+	<string>189 260 924 485 0 0 1366 745 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2 5 1361 740 0 0 1366 745 </string>
+	<string>683 4 682 741 0 0 1366 745 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>169 44 570 451 0 0 1366 746 </string>
 	<key>New Bookmarks</key>
@@ -848,6 +861,10 @@
 			<string>/Users/nick</string>
 		</dict>
 	</array>
+	<key>NoSyncTimeOfLastPromo</key>
+	<real>454164387.58565497</real>
+	<key>NoSyncTimeOfLastPromoDownload</key>
+	<real>469273068.808927</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -912,11 +929,11 @@
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>http://iterm2.com/appcasts/testing.xml</string>
+	<string>https://iterm2.com/appcasts/testing.xml</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-04-26T01:21:49Z</date>
+	<date>2015-11-15T09:37:46Z</date>
 	<key>SUSkippedVersion</key>
 	<string>1.0.0.20140629</string>
 	<key>SavePasteHistory</key>
@@ -966,6 +983,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.0.0.20150412</string>
+	<string>2.1.4</string>
 </dict>
 </plist>
