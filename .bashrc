@@ -69,4 +69,4 @@ export ANDROID_HOME=/usr/local/opt/android-sdk
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 alias tmux="tmux -2"
-inpath "git" && [ -f $HOME/.git-completion ] && . $HOME/.git-completion
+[ -f $HOME/.git-completion ] && . $HOME/.git-completion
