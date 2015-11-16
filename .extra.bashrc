@@ -751,7 +751,7 @@ machinearch=$(uname -m)
 [ -f /opt/local/etc/bash_completion ] && . /opt/local/etc/bash_completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 [ -f $HOME/etc/bash_completion ] && . $HOME/etc/bash_completion
-
+inpath "git" && [ -f $HOME/.git-completion ] && . $HOME/.git-completion
 if inpath "npm"; then
   npm completion > .npm-completion.tmp
   source .npm-completion.tmp
