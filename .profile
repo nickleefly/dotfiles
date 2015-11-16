@@ -4,6 +4,8 @@ if [ -n "$BASH_VERSION" ]; then
 	[ -f ~/.extra.bashrc ] && . ~/.extra.bashrc
 fi
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/go
