@@ -69,7 +69,6 @@ export ANDROID_HOME=/usr/local/opt/android-sdk
 
 alias tmux="tmux -2"
 [ -f $HOME/.git-completion ] && . $HOME/.git-completion
-source ~/.git-prompt
 
 # A little hack to add forward-and-back traversal with cd
 c () {
