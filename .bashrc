@@ -67,7 +67,6 @@ _Z_NO_PROMPT_COMMAND=1
 . ~/z/z.sh
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
-# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 alias tmux="tmux -2"
 [ -f $HOME/.git-completion ] && . $HOME/.git-completion
 source ~/.git-prompt
