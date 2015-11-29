@@ -3,8 +3,6 @@
   name = Xiuyu Li
   email = nickleefly@gmail.com
   signingkey = 0x71982FE6
-[github]
-  user = nickleefly
 [alias]
   ci = commit
   st = status
