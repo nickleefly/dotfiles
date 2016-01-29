@@ -67,19 +67,4 @@ _Z_NO_PROMPT_COMMAND=1
 . ~/z/z.sh
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
-alias tmux="tmux -2"
-
-# A little hack to add forward-and-back traversal with cd
-c () {
-  local a
-  alias cd="cd"
-  a="$(godir.php "$@")"
-  [ "$a" != "" ] && eval $a
-  [ -f .DS_Store ] && rm .DS_Store
-  alias cd="c"
-}
-alias cd="c"
-alias ..="c .."
-alias -- -="c -1"
-alias -- _="c +1"
-alias s="c --show"
+alias ..="cd .."
