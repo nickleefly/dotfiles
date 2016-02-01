@@ -68,3 +68,6 @@ _Z_NO_PROMPT_COMMAND=1
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
 alias ..="cd .."
+
+# force tmux to use 256 colors
+alias tmux='tmux -2'
