@@ -45,10 +45,10 @@ alias dl='cd ~/Downloads'
 alias dp='cd ~/Dropbox'
 alias enpm='npm --registry http://registry.npmjs.eu/'
 alias cnpm="npm --registry=https://registry.npm.taobao.org --disturl=https://npm.taobao.org/dist"
+alias npmo="npm --cache-min 9999999 "
 alias h='history'
 alias ndoe=node
 alias gos=go-search
-alias md="open /Users/nick/Applications/MacDown.app"
 alias n=npm
 alias np=npm
 alias nt="npm test"
