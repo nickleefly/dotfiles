@@ -11,6 +11,7 @@ sethost () {
 alias photoshop='open -a /Applications/Adobe\ Photoshop\ CC/Adobe\ Photoshop\ CC.app'
 alias chrome='open -a "Google Chrome"'
 alias safari='open -a "Safari"'
+alias dk='bash --login "/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh"'
 
 update_webkit () {
 	local rev=$( cat /Applications/WebKit.app/Contents/Resources/VERSION )

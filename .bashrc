@@ -7,11 +7,6 @@ export N_PREFIX=$HOME/.n
 export PATH=$HOME/local/bin:$PATH
 export PATH=~/npm-global/bin:$PATH
 
-function mkdir()
-{
-  command mkdir $1 && cd $1
-}
-
 function x () {
   local dir
   dir=$(ls -R | grep '[a-zA-Z0-9]:' | sed 's/://g' | fzf +m) &&
