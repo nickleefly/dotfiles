@@ -43,8 +43,7 @@ alias now='date -u "+%Y-%m-%dT%H:%M:%SZ"'
 alias dc='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias dp='cd ~/Dropbox'
-alias enpm='npm --registry http://registry.npmjs.eu/'
-alias cnpm="npm --registry=https://registry.npm.taobao.org --disturl=https://npm.taobao.org/dist"
+alias cnpm="npm --registry=https://registry.npm.taobao.org"
 alias npmo="npm --cache-min 9999999 "
 alias h='history'
 alias ndoe=node
