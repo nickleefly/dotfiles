@@ -2,7 +2,6 @@ if [ "$PS1" != "" ]; then
   DOT_BASHRC_LOADED=1
   [ "$DOT_PROFILE_LOADED" != "1" ] && . ~/.profile
 fi
-source ~/.nvm/nvm.sh
 export N_PREFIX=$HOME/.n
 export PATH=$HOME/local/bin:$PATH
 export PATH=~/npm-global/bin:$PATH

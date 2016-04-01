@@ -48,7 +48,6 @@ alias npmo="npm --cache-min 9999999 "
 alias h='history'
 alias ndoe=node
 alias gos=go-search
-alias n=npm
 alias np=npm
 alias nt="npm test"
 alias np="npm prefix"
