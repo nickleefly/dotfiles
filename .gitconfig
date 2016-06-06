@@ -3,6 +3,8 @@
   name = Xiuyu Li
   email = nickleefly@gmail.com
   signingkey = 0x71982FE6
+[github]
+  user = Xiuyu Li
 [alias]
   ci = commit
   st = status
@@ -72,5 +74,3 @@
   default = current
 [core]
   excludesfile = /Users/nick/.gitignore
-[github]
-  user = nickleefly

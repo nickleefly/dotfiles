@@ -10,6 +10,14 @@
 	<integer>1</integer>
 	<key>Default Bookmark Guid</key>
 	<string>8FC47210-B3EA-4460-B296-B1B81A8F24D0</string>
+	<key>Hotkey</key>
+	<false/>
+	<key>HotkeyChar</key>
+	<integer>109</integer>
+	<key>HotkeyCode</key>
+	<integer>46</integer>
+	<key>HotkeyModifiers</key>
+	<integer>1048840</integer>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
@@ -51,7 +59,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>410 364 620 392 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>721 19 717 852 0 0 1440 877 </string>
+	<string>1 19 1438 852 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -657,7 +665,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>FCA9333D-E1F0-4BA1-BDDC-6CC57281796C</string>
 	<key>NoSyncLastTipTime</key>
-	<real>485344446.46398699</real>
+	<real>486871001.73084301</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -678,6 +686,17 @@
 		<string>0006</string>
 		<string>0007</string>
 		<string>0008</string>
+		<string>0009</string>
+		<string>0010</string>
+		<string>0011</string>
+		<string>0012</string>
+		<string>0013</string>
+		<string>0014</string>
+		<string>0015</string>
+		<string>0016</string>
+		<string>0017</string>
+		<string>0018</string>
+		<string>0019</string>
 	</array>
 	<key>PointerActions</key>
 	<dict>
@@ -723,12 +742,12 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-05-18T03:09:16Z</date>
+	<date>2016-06-01T04:45:39Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>2.9.20160426</string>
+	<string>2.9.20160523</string>
 </dict>
 </plist>
