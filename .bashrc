@@ -40,6 +40,17 @@ ch() {
   sed 's#.*\(https*://\)#\1#' | xargs open
 }
 
+cdf () {
+  if [ -x /usr/bin/osascript ]; then
+    local target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
+    if [ "$target" != "" ]; then
+      cd "$target"; pwd
+    else
+      echo 'No Finder window found' >&2
+    fi
+  fi
+}
+
 function cleanfile () {
   if [ -z "$1" ]; then
     echo "Usage: remove duplicated lines without sortdt"
