@@ -17,7 +17,6 @@
   pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
   cl = log --graph --pretty=format:'%h%d %s (%an)'
   lo = log --oneline
-  authors = log --pretty=format:'%an <%ae>'
   dc = diff --cached
   lp = log -p
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative

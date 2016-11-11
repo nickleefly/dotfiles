@@ -77,3 +77,5 @@ alias ..="cd .."
 
 # force tmux to use 256 colors
 alias tmux='tmux -2'
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
