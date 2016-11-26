@@ -2,7 +2,7 @@
   # you probably want to change this bit.
   name = Xiuyu Li
   email = nickleefly@gmail.com
-  signingkey = 0x71982FE6
+	signingkey = 36FC059D941CEA6D
 [github]
   user = Xiuyu Li
 [alias]
