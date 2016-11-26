@@ -73,3 +73,5 @@
   default = current
 [core]
   excludesfile = /Users/nick/.gitignore
+[gpg]
+	program = gpg1
