@@ -66,6 +66,8 @@ alias meak="make"
 alias gci-am="git commit -am"
 alias authors="(echo 'Xiuyu Li <nickleefly@gmail.com>'; git authors | grep -v 'nickleefly' | perl -pi -e 's|\([^\)]*\)||g' 2>/dev/null | sort | uniq)"
 alias gdiff='git diff --no-index --color'
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 
 
 # try to avoid polluting the global namespace with lots of garbage.
