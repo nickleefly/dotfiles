@@ -5,6 +5,7 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export HISTCONTROL=ignoreboth:erasedups
 
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
