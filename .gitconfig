@@ -75,7 +75,3 @@
   excludesfile = /Users/nick/.gitignore
 [gpg]
 	program = gpg1
-[url "https://"]
-  insteadOf = git://
-[merge "ours"]
-	driver = true
