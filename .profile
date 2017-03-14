@@ -17,3 +17,4 @@ export PATH=~/terraform_0.8.8:$PATH
 
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
+export HISTCONTROL=ignoreboth:erasedups

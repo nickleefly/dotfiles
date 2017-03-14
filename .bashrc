@@ -78,4 +78,3 @@ alias ..="cd .."
 
 # force tmux to use 256 colors
 alias tmux='tmux -2'
-export HISTCONTROL=ignoreboth:erasedups
