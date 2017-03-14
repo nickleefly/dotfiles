@@ -12,6 +12,8 @@ export GOROOT=/usr/local/go
 export GOBIN=$HOME/go/bin
 export PATH=$GOPATH/bin:$PATH
 export PATH=$GOROOT/bin:$PATH
+export PATH=~/Documents/kubernetes/third_party/etcd:${PATH}
+export PATH=~/terraform_0.8.8:$PATH
 
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
