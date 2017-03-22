@@ -1,54 +1,7 @@
 # commands that only get loaded on the Darwin platform.
 # Mostly, these commands interact with specific Mac programs.
-
-
-sethost () {
-	sudo hostname sistertrain-lm
-	sudo scutil --set LocalHostName sistertrain-lm
-	sudo scutil --set HostName sistertrain-lm
-}
-
 alias photoshop='open -a /Applications/Adobe\ Photoshop\ CC/Adobe\ Photoshop\ CC.app'
 alias chrome='open -a "Google Chrome"'
 alias safari='open -a "Safari"'
 alias dk='bash --login "/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh"'
-
-update_webkit () {
-	local rev=$( cat /Applications/WebKit.app/Contents/Resources/VERSION )
-	local url=$( curl --silent http://nightly.webkit.org/builds/trunk/mac/latest | egrep "http://.*WebKit-SVN-r[0-9]+.dmg" -o | head -n 1 )
-	local latest=$( echo $url | egrep '[0-9]{4,}' -o )
-	if [ "$latest" == "" ]; then
-		echo "Couldn't get latest WebKit revision" > /dev/stderr
-		return 1
-	fi
-	if [ "$latest" == "$rev" ]; then
-		echo "WebKit already up to date [$rev]" > /dev/stderr
-		return 0
-	fi
-	echo "Updating WebKit from $rev to $latest..." > /dev/stderr
-	
-	curl -sL $url > /tmp/latest-webkit-svn.dmg
-	if ! [ -f /tmp/latest-webkit-svn.dmg ]; then
-		echo "Download from $url failed" > /dev/stderr
-		return 1
-	fi
-	
-	hdiutil attach /tmp/latest-webkit-svn.dmg -mountpoint /tmp/latest-webkit-svn -quiet
-	
-	killall -QUIT WebKit 2>/dev/null
-	rm -rf /Applications/WebKit.app 2>/dev/null
-
-	ret=0
-	if cp -R /tmp/latest-webkit-svn/WebKit.app /Applications/WebKit.app; then
-		echo "WebKit updated to $latest."
-	else
-		echo "Failed to update" >/dev/stderr
-		ret=1
-	fi
-
-	hdiutil detach /tmp/latest-webkit-svn -quiet
-	rm /tmp/latest-webkit-svn.dmg 2>/dev/null
-
-	return $ret
-}
 

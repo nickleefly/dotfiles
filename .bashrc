@@ -74,8 +74,5 @@ export ANDROID_HOME=/usr/local/opt/android-sdk
 export ANDROID_NDK_HOME=/usr/local/opt/android-ndk
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
-alias ..="cd .."
-
 # force tmux to use 256 colors
 alias tmux='tmux -2'
-export HISTCONTROL=ignoreboth:erasedups
