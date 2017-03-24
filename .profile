@@ -14,6 +14,7 @@ export PATH=$GOPATH/bin:$PATH
 export PATH=$GOROOT/bin:$PATH
 export PATH=~/Documents/kubernetes/third_party/etcd:${PATH}
 export PATH=~/terraform_0.8.8:$PATH
+export PATH=~/packer_0.12.3:$PATH
 
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
