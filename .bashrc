@@ -73,3 +73,4 @@ _Z_NO_PROMPT_COMMAND=1
 
 # force tmux to use 256 colors
 alias tmux='tmux -2'
+alias fuckit='git commit -am "$(curl -s http://www.whatthecommit.com/index.txt )"'
