@@ -76,3 +76,5 @@ alias tmux='tmux -2'
 alias fuckit='git commit -am "$(curl -s http://www.whatthecommit.com/index.txt )"'
 
 source <(npx --shell-auto-fallback bash)
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
