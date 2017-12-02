@@ -1,4 +1,12 @@
+# Pre install
 
+```
+brew install reattach-to-user-namespace
+brew install fzf
+brew install ag
+brew install ripgrep
+brew install ctags
+```
 # how to install
 
 ```
