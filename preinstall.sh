@@ -1,39 +1,55 @@
 #!/bin/bash
 
+fancy_echo() {
+  local fmt="$1"; shift
+
+  # shellcheck disable=SC2059
+  printf "\n$fmt\n" "$@"
+}
+
 # Install homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew update
-brew tap caskroom/cask
-brew tap caskroom/versions
-
+brew update --force
 formulas=(
   reattach-to-user-namespace
-  fzf
-  ag
-  ripgrep
-  ctags
-  git
   bash
-  bash-completion
-  nodejs
-  wget
-  unicodechecker
-  ipv6toolkit
-  ack
-  the_silver_searcher
-  wifi-password
-  tmux
-  cmake
-  emacs
-  reattach-to-user-namespace
   vim --override-system-vi
   macvim --override-system-vim --custom-system-icons
-  git-extras
-  fzf
-  wireshark
-  cytopia/tap/ffscreencast
-  youtube-dl
 )
+brew install ${formulas[@]}
+
+brew bundle --file=- <<EOF
+tap "homebrew/services"
+tap "universal-ctags/universal-ctags"
+tap "caskroom/cask"
+tap "caskroom/versions"
+
+# Unix
+brew "universal-ctags", args: ["HEAD"]
+brew "fzf"
+brew "ag"
+brew "ripgrep"
+brew "ctags"
+brew "git"
+brew "bash-completion"
+brew "nodejs"
+brew "wget"
+brew "unicodechecker"
+brew "ipv6toolkit"
+brew "ack"
+brew "the_silver_searcher"
+brew "wifi-password"
+brew "tmux"
+brew "cmake"
+brew "emacs"
+brew "reattach-to-user-namespace"
+brew "git-extras"
+brew "fzf"
+brew "wireshark"
+brew "cytopia/tap/ffscreencast"
+brew "youtube-dl"
+brew
+EOF
 
 casks=(
   google-chrome
@@ -52,13 +68,33 @@ casks=(
   alfred
   flux
 )
-# Add the new shell to the list of allowed shells
-sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
-# Change to the new shell
-chsh -s /usr/local/bin/bash
-
-brew install ${formulas[@]}
 brew cask install ${casks[@]}
+
+update_shell() {
+  local shell_path;
+  shell_path="$(which bash)"
+
+  fancy_echo "Changing your shell to bash ..."
+  if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
+    fancy_echo "Adding '$shell_path' to /etc/shells"
+    sudo sh -c "echo $shell_path >> /etc/shells"
+  fi
+  sudo chsh -s "$shell_path" "$USER"
+}
+
+case "$SHELL" in
+  */bash)
+    if [ "$(which bash)" != '/usr/local/bin/bash' ] ; then
+      update_shell
+    fi
+    ;;
+  *)
+    update_shell
+    ;;
+esac
+
+brew cleanup
+brew cask cleanup
 
 # Install shell extensions
 /usr/local/opt/fzf/install
