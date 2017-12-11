@@ -32,6 +32,7 @@ formulas=(
   fzf
   wireshark
   cytopia/tap/ffscreencast
+  youtube-dl
 )
 
 casks=(
