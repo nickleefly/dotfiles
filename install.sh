@@ -1,4 +1,20 @@
 #!/bin/bash
+dirs=(
+"z"
+)
+for dir in "${dirs[@]}"; do
+  if [ -e ~/$dir ]; then
+    if ! (rm ~/$dir/* || unlink ~/$dir); then
+      echo "Failed on $dir" > /dev/stderr
+    fi
+  else
+    mkdir ~/$dir
+  fi
+  if ln -sfn $(pwd)/$dir/* ~/$dir; then
+    echo "Linked: $dir" > /dev/stderr
+  fi
+done
+
 ! [ -d ~/.dotfile_backup ] && mkdir ~/.dotfile_backup
 for i in .*; do
 	if ! [ "$i" == "." ] && ! [ "$i" == ".." ] && ! [ "$i" == ".git" ]; then
