@@ -141,7 +141,7 @@ __set_path PKG_CONFIG_PATH "$(__form_paths lib/pkgconfig):/usr/X11/lib/pkgconfig
 __set_path CDPATH ".:..:$HOME/dev/npm:$HOME/dev:$HOME/dev/js:$HOME"
 
 # Go up N directories
-up() {
+goup() {
   str=""
   count=0
   while [ "$count" -lt "$1" ];
