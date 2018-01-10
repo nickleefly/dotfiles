@@ -8,8 +8,12 @@
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
 	<integer>1</integer>
+	<key>AppleWindowTabbingMode</key>
+	<string>manual</string>
 	<key>Default Bookmark Guid</key>
 	<string>A3F69651-AA80-4EFD-94C7-56AAA0B8E57A</string>
+	<key>HotkeyMigratedFromSingleToMulti</key>
+	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSColorPanelMode</key>
@@ -65,7 +69,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>319 177 1016 502 0 0 1366 745 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2 -4 1361 741 0 0 1366 745 </string>
+	<string>0 16 1366 718 0 0 1366 745 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>169 44 570 451 0 0 1366 745 </string>
 	<key>New Bookmarks</key>
@@ -737,7 +741,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-07-26T12:48:18Z</date>
+	<date>2017-12-18T15:06:20Z</date>
 	<key>SUSkippedVersion</key>
 	<string>1.0.0.20140629</string>
 	<key>Secure Input</key>
@@ -745,6 +749,6 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>3.0.15</string>
+	<string>3.1.5</string>
 </dict>
 </plist>
