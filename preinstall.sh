@@ -8,13 +8,20 @@ fancy_echo() {
 }
 
 # Install homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew update --force
+which -s brew
+if [[ $? != 0 ]] ; then
+     # Install Homebrew
+    fancy_echo "install homebrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+else
+    fancy_echo "brew installed"
+    brew update
+fi
+
 formulas=(
   reattach-to-user-namespace
   bash
   vim --override-system-vi
-  macvim --override-system-vim --custom-system-icons
 )
 brew install ${formulas[@]}
 
@@ -29,12 +36,10 @@ brew "universal-ctags", args: ["HEAD"]
 brew "fzf"
 brew "ag"
 brew "ripgrep"
-brew "ctags"
 brew "git"
 brew "bash-completion"
 brew "nodejs"
 brew "wget"
-brew "unicodechecker"
 brew "ipv6toolkit"
 brew "ack"
 brew "the_silver_searcher"
@@ -48,10 +53,10 @@ brew "fzf"
 brew "wireshark"
 brew "cytopia/tap/ffscreencast"
 brew "youtube-dl"
-brew
 EOF
 
 casks=(
+  unicodechecker
   google-chrome
   docker
   dropbox
@@ -59,7 +64,6 @@ casks=(
   google-cloud-sdk
   iterm2
   go2shell
-  fiddler
   macdown
   sequel-pro
   sublime-text

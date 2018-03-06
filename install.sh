@@ -4,13 +4,11 @@ dirs=(
 )
 for dir in "${dirs[@]}"; do
   if [ -e ~/$dir ]; then
-    if ! (rm ~/$dir/* || unlink ~/$dir); then
+    if ! (unlink ~/$dir); then
       echo "Failed on $dir" > /dev/stderr
     fi
-  else
-    mkdir ~/$dir
   fi
-  if ln -sfn $(pwd)/$dir/* ~/$dir; then
+  if ln -sfn $(pwd)/$dir ~/$dir; then
     echo "Linked: $dir" > /dev/stderr
   fi
 done
