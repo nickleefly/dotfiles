@@ -26,42 +26,6 @@ age / (1000 * 60 * 60 * 24 * 365.25)
 JS
 }
 
-# Why this is not exported in OS X, I have no idea
-export HOSTNAME
-alias now='date -u "+%Y-%m-%dT%H:%M:%SZ"'
-alias dc='cd ~/Documents'
-alias dl='cd ~/Downloads'
-alias dp='cd ~/Dropbox'
-alias ..="cd .."
-alias -- -="cd -"
-alias cnpm="npm --registry=https://registry.npm.taobao.org"
-alias npmo="npm --cache-min 9999999 "
-alias h='history'
-alias ndoe=node
-alias ndoe=node
-alias noed=node
-alias gos=go-search
-alias np=npm
-alias nt="npm test"
-alias nf="npm test -- --no-coverage"
-alias nr="npm root"
-alias ngr="npm root -g"
-alias ngp="npm prefix -g"
-alias cdnp='cd $(npm prefix -g)'
-alias gci="git commit"
-alias gap="git add -p"
-alias gst="git status -s -uno"
-alias glg="git lg"
-alias gti="git"
-alias maek="make"
-alias meak="make"
-alias meak="make"
-alias gci-am="git commit -am"
-alias authors="(echo 'Xiuyu Li <nickleefly@gmail.com>'; git authors | grep -v 'nickleefly' | perl -pi -e 's|\([^\)]*\)||g' 2>/dev/null | sort | uniq)"
-alias gdiff='git diff --no-index --color'
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
-
 # try to avoid polluting the global namespace with lots of garbage.
 # the *right* way to do this is to have everything inside functions,
 # and use the "local" keyword.  But that would take some work to
@@ -130,8 +94,6 @@ __form_paths () {
 }
 #echo '119   ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
 
-# mac tar fixing
-export COPYFILE_DISABLE=true
 # homebrew="$HOME/.homebrew"
 local homebrew="/usr/local"
 __set_path PATH "$HOME/bin::$homebrew/share/npm/bin:$(__form_paths bin sbin nodejs/bin libexec include):/usr/local/nginx/sbin:/usr/X11R6/bin:/usr/local/mysql/bin:/usr/X11R6/include:$HOME/Library/Application Support/TextMate/Support/bin"
@@ -161,15 +123,6 @@ js () {
   NODE_READLINE_SEARCH=1 $n "$@"
 }
 
-export NODE_REPL_HISTORY_FILE=~/.node-history
-export HISTSIZE=10000
-export HISTFILESIZE=1000000000
-export HISTCONTROL=ignoreboth:erasedups
-# I prefer to use : instead of ^ for history replacements
-# much faster to type.  It'd be neat to use /, but then it gets
-# confused with absolute paths, like "/bin/env"
-export histchars="!:#"
-
 if ! [ -z "$BASH" ]; then
   __garbage __shopt
   __shopt () {
@@ -193,14 +146,10 @@ export INPUTRC=$HOME/.inputrc
 export JOBS=1
 
 # list of editors, by preference.
-alias edit="vim"
-alias e="vim"
+# eg ew node
 ew () {
-  edit $(which $1)
+  vim $(which $1)
 }
-alias sued="sudo -e"
-export EDITOR=vim
-export VISUAL="$EDITOR"
 
 # shebang <file> <program> [<args>]
 shebang () {
@@ -233,9 +182,6 @@ shebang () {
   return 0
 }
 
-# a friendlier delete on the command line
-alias emptytrash="find $HOME/.Trash -not -path $HOME/.Trash -exec rm -rf {} \; 2>/dev/null"
-
 local lscolor=""
 __garbage lscolor
 if [ "$TERM" != "dumb" ] && [ -f "$(which dircolors 2>/dev/null)" ]; then
@@ -250,15 +196,10 @@ alias lal="$ls_cmd -FLlash"
 alias ll="$ls_cmd -Flsh"
 alias alg="alias | grep"
 
-export MANPAGER=more
-
 # domain sniffing
 wi () {
   whois $1 | egrep -i '(registrar:|no match|record expires on|holder:)'
 }
-
-#make tree a little cooler looking.
-alias tree="tree -CFa -I 'rhel.*.*.package|.git' --dirsfirst"
 
 prof () {
   unset BASH_EXTRAS_LOADED

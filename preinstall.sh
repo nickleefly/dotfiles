@@ -7,16 +7,15 @@ fancy_echo() {
   printf "\n$fmt\n" "$@"
 }
 
-# Install homebrew
-which -s brew
-if [[ $? != 0 ]] ; then
-     # Install Homebrew
-    fancy_echo "install homebrew"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-else
-    fancy_echo "brew installed"
-    brew update
+# Check for Homebrew,
+# Install if we don't have it
+if test ! $(which brew); then
+  echo "Installing homebrew..."
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
+
+# Update homebrew recipes
+brew update
 
 formulas=(
   reattach-to-user-namespace
@@ -33,7 +32,6 @@ tap "caskroom/versions"
 
 # Unix
 brew "universal-ctags", args: ["HEAD"]
-brew "fzf"
 brew "ag"
 brew "ripgrep"
 brew "git"
@@ -41,7 +39,6 @@ brew "bash-completion"
 brew "nodejs"
 brew "wget"
 brew "ipv6toolkit"
-brew "ack"
 brew "the_silver_searcher"
 brew "wifi-password"
 brew "tmux"
@@ -49,30 +46,24 @@ brew "cmake"
 brew "emacs"
 brew "reattach-to-user-namespace"
 brew "git-extras"
-brew "fzf"
-brew "wireshark"
-brew "cytopia/tap/ffscreencast"
 brew "youtube-dl"
 EOF
 
+brew install wireshark --with-qt
 casks=(
   unicodechecker
-  google-chrome
-  docker
   dropbox
   1password
   google-cloud-sdk
-  iterm2
   go2shell
   macdown
-  sequel-pro
   sublime-text
   visual-studio-code
   spectacle
   alfred
   flux
 )
-brew cask install ${casks[@]}
+brew cask install --appdir="/Applications" ${casks[@]}
 
 update_shell() {
   local shell_path;
@@ -101,7 +92,6 @@ brew cleanup
 brew cask cleanup
 
 # Install shell extensions
-/usr/local/opt/fzf/install
 ln -s "/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl" ~/bin/subl
 
 npmglobals=(
@@ -115,17 +105,17 @@ npmglobals=(
   vmd
   trash-cli
   mkdirp
-  morkdown
   alfred-npms
   uglify-js
   serve
   dat
-  level-todo
   standard
   node-gyp
   nave
   n
   node-static
+  npm-check
+  git-open
 )
 
 npm install -g ${npmglobals[@]}

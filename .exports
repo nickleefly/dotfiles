@@ -1,0 +1,36 @@
+export N_PREFIX=$HOME/.n
+export PATH=$HOME/local/bin:$PATH
+export PATH=~/npm-global/bin:$PATH
+export HISTIGNORE="cd [a-zA-Z0-9_.*]*:mv [a-zA-Z0-9_.*]*"
+
+# Why this is not exported in OS X, I have no idea
+export HOSTNAME
+
+# mac tar fixing
+export COPYFILE_DISABLE=true
+
+export NODE_REPL_HISTORY_FILE=~/.node-history
+export HISTSIZE=10000
+export HISTFILESIZE=1000000000
+export HISTCONTROL=ignoreboth:erasedups
+# I prefer to use : instead of ^ for history replacements
+# much faster to type.  It'd be neat to use /, but then it gets
+# confused with absolute paths, like "/bin/env"
+export histchars="!:#"
+
+export EDITOR=vim
+export VISUAL="$EDITOR"
+
+export MANPAGER=more
+
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/go
+export GOBIN=$HOME/go/bin
+export PATH=$GOPATH/bin:$PATH
+export PATH=$GOROOT/bin:$PATH
+export PATH=~/Documents/kubernetes/third_party/etcd:${PATH}
+
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools

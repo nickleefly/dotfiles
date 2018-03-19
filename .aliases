@@ -1,0 +1,79 @@
+# Easier navigation: .., ..., ~ and -
+alias ..="cd .."
+alias cd..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~" # `cd` is probably faster to type though
+alias -- -="cd -"
+
+alias cask='brew cask' # i <3 u cask
+alias where=which # sometimes i forget
+alias brwe=brew  #typos
+
+alias hosts='sudo $EDITOR /etc/hosts'   # yes I occasionally 127.0.0.1 twitter.com ;)
+alias sued="sudo -e"
+
+# mv, rm, cp
+alias mv='mv -v'
+alias rm='trash'
+alias cp='cp -v'
+
+alias h='history'
+alias now='date -u "+%Y-%m-%dT%H:%M:%SZ"'
+
+alias dc='cd ~/Documents'
+alias dl='cd ~/Downloads'
+alias dp='cd ~/Dropbox'
+
+alias cnpm="npm --registry=https://registry.npm.taobao.org"
+alias npmo="npm --cache-min 9999999 "
+
+alias ndoe="node"
+alias ndoe="node"
+alias noed="node"
+alias np="npm"
+alias nt="npm test"
+alias nf="npm test -- --no-coverage"
+alias nr="npm root"
+alias ngr="npm root -g"
+alias ngp="npm prefix -g"
+alias cdnp='cd $(npm prefix -g)'
+
+alias gos="go-search"
+
+alias g="git"
+alias gci="git commit"
+alias gap="git add -p"
+alias gst="git status -s -uno"
+alias glg="git lg"
+alias gti="git"
+alias gci-am="git commit -am"
+alias gdiff='git diff --no-index --color'
+
+alias maek="make"
+alias meak="make"
+alias meak="make"
+
+alias ag='ag -f --hidden'
+alias rg='rg -f --hidden'
+
+# Shortcuts
+alias v="vim"
+alias edit="vim"
+alias e="vim"
+alias vf='vim "$(fzf)"'
+
+# Update installed Homebrew, npm, and their installed packages
+alias brew_update="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew cask cleanup; brew prune; brew doctor; npm-check -g -u"
+alias update_brew_npm='brew_update; npm install npm -g; npm update -g'
+
+# force tmux to use 256 colors
+alias tmux='tmux -2'
+alias fuckit='git commit -am "$(curl -s http://www.whatthecommit.com/index.txt )"'
+
+#make tree a little cooler looking.
+alias tree="tree -CFa -I 'rhel.*.*.package|.git' --dirsfirst"
+
+# a friendlier delete on the command line
+alias emptytrash="find $HOME/.Trash -not -path $HOME/.Trash -exec rm -rf {} \; 2>/dev/null"
