@@ -119,3 +119,8 @@ npmglobals=(
 )
 
 npm install -g ${npmglobals[@]}
+
+# github.com/rupa/z   - oh how i love you
+git clone https://github.com/rupa/z.git ~/z
+# consider reusing your current .z file if possible. it's painful to rebuild :)
+# z is hooked up in .bashrc

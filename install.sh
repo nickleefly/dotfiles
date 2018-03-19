@@ -1,17 +1,4 @@
 #!/bin/bash
-dirs=(
-"z"
-)
-for dir in "${dirs[@]}"; do
-  if [ -e ~/$dir ]; then
-    if ! (unlink ~/$dir); then
-      echo "Failed on $dir" > /dev/stderr
-    fi
-  fi
-  if ln -sfn $(pwd)/$dir ~/$dir; then
-    echo "Linked: $dir" > /dev/stderr
-  fi
-done
 
 ! [ -d ~/.dotfile_backup ] && mkdir ~/.dotfile_backup
 for i in .*; do
