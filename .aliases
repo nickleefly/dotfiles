@@ -77,3 +77,6 @@ alias tree="tree -CFa -I 'rhel.*.*.package|.git' --dirsfirst"
 
 # a friendlier delete on the command line
 alias emptytrash="find $HOME/.Trash -not -path $HOME/.Trash -exec rm -rf {} \; 2>/dev/null"
+
+alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
+alias sshhosts="grep -w -i "Host" ~/.ssh/config | sed 's/Host//'"

@@ -54,6 +54,8 @@ casks=(
   unicodechecker
   dropbox
   1password
+  google-chrome
+  google-chrome-canary
   google-cloud-sdk
   go2shell
   macdown
