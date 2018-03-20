@@ -189,7 +189,8 @@ if [ "$TERM" != "dumb" ] && [ -f "$(which dircolors 2>/dev/null)" ]; then
   lscolor=" --color=auto"
 fi
 local ls_cmd="ls$lscolor"
-alias ls="$ls_cmd"
+alias ls='gls --color=auto'
+alias lsd='ls -l | grep "^d"' # only directories
 alias la="$ls_cmd -Fla"
 alias lah="$ls_cmd -Flah"
 alias lal="$ls_cmd -FLlash"
