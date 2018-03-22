@@ -23,3 +23,6 @@ _Z_NO_PROMPT_COMMAND=1
 source <(npx --shell-auto-fallback bash)
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
+
+# Terraform & Packer Paths.
+export PATH=~/terraform/:~/packer/:$PATH
