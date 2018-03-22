@@ -25,4 +25,4 @@ source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.i
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
 
 # Terraform & Packer Paths.
-export PATH=~/terraform/:~/packer/:$PATH
+export PATH=~/terraform:~/packer:$PATH
