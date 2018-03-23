@@ -24,5 +24,12 @@ source <(npx --shell-auto-fallback bash)
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
 
+export PATH=/usr/local/go/bin:$PATH
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/go
+export GOBIN=$HOME/go/bin
+export PATH=$GOPATH/bin:$PATH
+export PATH=$GOROOT/bin:$PATH
+
 # Terraform & Packer Paths.
 export PATH=~/terraform:~/packer:$PATH
