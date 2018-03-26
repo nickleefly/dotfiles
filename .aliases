@@ -55,8 +55,7 @@ alias maek="make"
 alias meak="make"
 alias meak="make"
 
-alias ag='ag -f --hidden'
-alias rg='rg -f --hidden'
+alias ag='ag -f --hidde'
 
 # Shortcuts
 alias v="vim"
