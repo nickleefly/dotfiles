@@ -10,9 +10,6 @@ export HOSTNAME
 export COPYFILE_DISABLE=true
 
 export NODE_REPL_HISTORY_FILE=~/.node-history
-export HISTSIZE=10000
-export HISTFILESIZE=1000000000
-export HISTCONTROL=ignoreboth:erasedups
 # I prefer to use : instead of ^ for history replacements
 # much faster to type.  It'd be neat to use /, but then it gets
 # confused with absolute paths, like "/bin/env"
