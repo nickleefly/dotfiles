@@ -610,11 +610,6 @@ calc () {
   echo "$expression" | bc
 }
 
-cd_with_fzf() {
-  cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)" && clear
-}
-alias cf="cd_with_fzf"
-
 #echo '950   ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
 
 type git >&/dev/null && [ -f $HOME/.git-completion ] && . $HOME/.git-completion
