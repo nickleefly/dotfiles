@@ -1,10 +1,10 @@
 [user]
-  # you probably want to change this bit.
-  name = Xiuyu Li
-  email = nickleefly@gmail.com
-  signingkey = 36FC059D941CEA6D
-[github]
-  user = nickleefly
+	name = Xiuyu Li
+	email = xiuyu.li@fastretailing.com
+[includeIf "gitdir:~/Documents/work/"]
+  path = ~/.gitconfig-work
+[includeIf "gitdir:~/Documents/personal/"]
+  path = ~/.gitconfig-personal
 [alias]
   ci = commit
   st = status
@@ -45,6 +45,8 @@
 
   ; Update all the submodules to the latest version
   pullsub = submodule foreach git pull
+  setpro = "config --global user.email 'xiuyu.li@fastretailing.com'"
+  setpersonal = "config --global user.email 'nickleefly@gmail.com'"
 [branch.master]
   mergeoptions = log
 [color]
@@ -77,3 +79,5 @@
   excludesfile = ~/.gitignore
 [gpg]
   program = /usr/local/bin/gpg
+[fetch]
+  prune = true
