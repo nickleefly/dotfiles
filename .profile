@@ -33,3 +33,4 @@ export PATH=$GOROOT/bin:$PATH
 # Terraform & Packer Paths.
 export PATH=~/terraform:~/packer:$PATH
 export PATH=~/.emacs.d/bin:$PATH
+export PATH="~/.local/bin:$PATH"
