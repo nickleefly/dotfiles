@@ -45,7 +45,6 @@
 
   ; Update all the submodules to the latest version
   pullsub = submodule foreach git pull
-  setpro = "config --global user.email 'xiuyu.li@fastretailing.com'"
   setpersonal = "config --global user.email 'nickleefly@gmail.com'"
 [branch.master]
   mergeoptions = log
