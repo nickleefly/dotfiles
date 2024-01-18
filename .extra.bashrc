@@ -184,8 +184,8 @@ shebang () {
 
 local lscolor=""
 __garbage lscolor
-if [ "$TERM" != "dumb" ] && [ -f "$(which dircolors 2>/dev/null)" ]; then
-  eval "$(dircolors -b)"
+if [ "$TERM" != "dumb" ] && [ -f "$(which gdircolors 2>/dev/null)" ]; then
+  eval "$(gdircolors -b)"
   lscolor=" --color=auto"
 fi
 local ls_cmd="ls$lscolor"

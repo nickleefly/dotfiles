@@ -35,7 +35,7 @@ brew "universal-ctags", args: ["HEAD"]
 brew "ag"
 brew "ripgrep"
 brew "git"
-brew "bash-completion"
+brew "bash-completion@2"
 brew "nodejs"
 brew "wget"
 brew "ipv6toolkit"
