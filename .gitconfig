@@ -1,10 +1,10 @@
 [user]
-	name = Xiuyu Li
-	email = xiuyu.li@fastretailing.com
-[includeIf "gitdir:~/Documents/work/"]
-  path = ~/.gitconfig-work
-[includeIf "gitdir:~/Documents/personal/"]
-  path = ~/.gitconfig-personal
+  # you probably want to change this bit.
+  name = Xiuyu Li
+  email = nickleefly@gmail.com
+  signingkey = 36FC059D941CEA6D
+[github]
+  user = nickleefly
 [alias]
   ci = commit
   st = status
@@ -45,7 +45,6 @@
 
   ; Update all the submodules to the latest version
   pullsub = submodule foreach git pull
-  setpersonal = "config --global user.email 'nickleefly@gmail.com'"
 [branch.master]
   mergeoptions = log
 [color]
