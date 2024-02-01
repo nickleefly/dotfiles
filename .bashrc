@@ -7,3 +7,4 @@ export HISTSIZE=10000
 export HISTFILESIZE=1000000000
 export HISTCONTROL=ignoreboth:erasedups
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
