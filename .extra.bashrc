@@ -256,7 +256,7 @@ gam () {
   fi
 }
 
-gh () {
+ghurl () {
   local r=${1:-"origin"}
   if [ "$r" == "browse" ]; then
     r="origin"
@@ -372,29 +372,6 @@ gsh () {
   git show --no-patch --pretty=%H "$c" | tee >(xargs echo -n | pbcopy)
 }
 
-appveyor () {
-  cat > appveyor.yml <<YML
-environment:
-  matrix:
-    - nodejs_version: '5'
-    - nodejs_version: '4'
-    - nodejs_version: '0.12'
-install:
-  - ps: Install-Product node \$env:nodejs_version
-  - set CI=true
-  - npm -g install npm@latest
-  - set PATH=%APPDATA%\\npm;%PATH%
-  - npm install
-matrix:
-  fast_finish: true
-build: off
-version: '{build}'
-shallow_clone: true
-clone_depth: 1
-test_script:
-  - npm test
-YML
-}
 
 travis () {
   cat > .travis.yml <<YML
@@ -406,45 +383,6 @@ node_js:
   - '5'
   - '6'
 YML
-}
-
-xyl () {
-  if ! [ -f package.json ]; then
-    echo "Run xyl in a npm project." >&2
-    return 1
-  fi
-
-  cat >LICENSE <<ISC
-The MIT License
-Copyright (c) MIT and Contributors
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted, provided that the above
-copyright notice and this permission notice appear in all copies.
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
-MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
-ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
-ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
-IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-ISC
-
-  local current="$(json license < package.json)"
-  if [ "$current" = "MIT" ]; then
-    echo "already MIT" >&2
-    return 0
-  fi
-
-  node -e '
-    j=require("./package.json")
-    j.license = "MIT"
-    console.log(JSON.stringify(j, null, 2))' > package.json.tmp &&\
-  mv package.json.tmp package.json &&\
-  git add package.json LICENSE &&\
-  git commit -m "mit license" &&\
-  npm version patch &&\
-  git push origin master --tags &&\
-  npm publish
 }
 
 npmgit () {
