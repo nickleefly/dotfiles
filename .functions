@@ -88,3 +88,78 @@ cd_with_fzf() {
   cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)" && clear
 }
 alias cf="cd_with_fzf"
+
+# Git Worktree
+alias gw='git worktree'
+alias gwl='git worktree list'
+
+# gwr: git worktree remove (interactive multiselect if no args)
+gwr() {
+  if [ $# -eq 0 ]; then
+    local worktrees
+    worktrees=$(git worktree list | fzf -m | awk '{print $1}')
+    for worktree in $worktrees; do
+      if [ -n "$worktree" ]; then
+        if ! git worktree remove "$worktree" 2>/dev/null; then
+          read -p "Force remove $worktree? [y/N] " confirm
+          if [[ "$confirm" =~ ^[yY]$ ]]; then
+            git worktree remove --force "$worktree"
+          fi
+        fi
+      fi
+    done
+  else
+    if ! git worktree remove "$1" 2>/dev/null; then
+      read -p "Force remove $1? [y/N] " confirm
+      if [[ "$confirm" =~ ^[yY]$ ]]; then
+        git worktree remove --force "$1"
+      fi
+    fi
+  fi
+}
+
+# gws: git worktree switch (interactive)
+gws() {
+  local worktree
+  worktree=$(git worktree list | fzf | awk '{print $1}')
+  if [ -n "$worktree" ]; then
+    cd "$worktree"
+  fi
+}
+
+# gcow: git checkout worktree (-b for new branch)
+gcow() {
+  local create_branch=0
+  local args=()
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -b)
+        create_branch=1
+        shift
+        ;;
+      *)
+        args+=("$1")
+        shift
+        ;;
+    esac
+  done
+
+  if [ ${#args[@]} -eq 0 ]; then
+    echo "Usage: gcow [-b] <branch> [path]"
+    return 1
+  fi
+
+  local branch="${args[0]}"
+  local path="${args[1]}"
+
+  if [ -z "$path" ]; then
+    path="../$(basename "$(git rev-parse --show-toplevel)")-$branch"
+  fi
+
+  if [ "$create_branch" -eq 1 ]; then
+    git worktree add "$path" -b "$branch"
+  else
+    git worktree add "$path" "$branch"
+  fi && cd "$path"
+}

@@ -35,3 +35,22 @@ line in your bashrc.
 If you come up with something interesting or clever or make
 something work better, send me a pull request or drop a line
 to i at foo hack dot com.
+
+## Recommended Tools
+
+To get the most out of these dotfiles, I recommend installing the following modern CLI tools:
+
+- [zoxide](https://github.com/ajeetdsouza/zoxide) - A smarter cd command.
+- [eza](https://github.com/eza-community/eza) - A modern, maintained replacement for ls.
+- [bat](https://github.com/sharkdp/bat) - A cat clone with wings.
+- [ripgrep (rg)](https://github.com/BurntSushi/ripgrep) - A line-oriented search tool.
+- [fd](https://github.com/sharkdp/fd) - A simple, fast and user-friendly alternative to 'find'.
+- [fzf](https://github.com/junegunn/fzf) - A command-line fuzzy finder.
+- [starship](https://starship.rs/) - The minimal, blazing-fast, and infinitely customizable prompt for any shell.
+- [television (tv)](https://github.com/alexpasmantier/television) - A general purpose TUI for fuzzy selection.
+
+On macOS, you can install them via Homebrew:
+
+```bash
+brew install zoxide eza bat ripgrep fd fzf starship television
+```

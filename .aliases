@@ -2,6 +2,23 @@
 alias ..="cd .."
 alias cd..="cd .."
 alias ...="cd ../.."
+
+# Modern tools aliases
+if command -v eza &> /dev/null; then
+  alias ls='eza --icons --group-directories-first'
+  alias ll='eza -lh --icons --group-directories-first'
+  alias la='eza -a --icons --group-directories-first'
+  alias lt='eza --tree --icons'
+fi
+
+if command -v bat &> /dev/null; then
+  alias cat='bat --style=plain'
+  alias preview='bat --style=numbers --color=always'
+fi
+
+if command -v rg &> /dev/null; then
+  alias grep='rg'
+fi
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though

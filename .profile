@@ -12,8 +12,11 @@ if [ -n "$BASH_VERSION" ]; then
 	[ -f ~/.extra.bashrc ] && . ~/.extra.bashrc
 fi
 
-_Z_NO_PROMPT_COMMAND=1
-. ~/z/z.sh
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init bash)"
+else
+  [ -f ~/z/z.sh ] && . ~/z/z.sh
+fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export PATH=/usr/local/go/bin:$PATH
