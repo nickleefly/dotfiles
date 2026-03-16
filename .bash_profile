@@ -8,5 +8,8 @@ export PATH
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
-eval $(gdircolors ~/.dircolors/dircolors.256dark)
-. "$HOMEBREW_PREFIX/etc/bash_completion.d/ssh"
+if type gdircolors > /dev/null 2>&1; then
+  eval "$(gdircolors -b ~/.dircolors)"
+fi
+[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+export BASH_SILENCE_DEPRECATION_WARNING=1

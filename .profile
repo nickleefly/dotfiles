@@ -12,12 +12,15 @@ if [ -n "$BASH_VERSION" ]; then
 	[ -f ~/.extra.bashrc ] && . ~/.extra.bashrc
 fi
 
-if command -v zoxide &> /dev/null; then
-  eval "$(zoxide init bash)"
-else
-  [ -f ~/z/z.sh ] && . ~/z/z.sh
-fi
+
+_Z_NO_PROMPT_COMMAND=1
+. ~/z/z.sh
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # 加载 nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 export PATH=/usr/local/go/bin:$PATH
 export GOPATH=$HOME/go
