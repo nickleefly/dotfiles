@@ -235,13 +235,6 @@ pushprof () {
   return $failures
 }
 
-export GITHUB_TOKEN=$(git config --get github.token)
-export GITHUB_USER=$(git config --get github.user)
-export GIT_COMMITTER_NAME=$(git config --get user.name)
-export GIT_COMMITTER_EMAIL=$(git config --get user.email)
-export GIT_AUTHOR_NAME=$(git config --get user.name)
-export GIT_AUTHOR_EMAIL=$(git config --get user.email)
-
 grim () {
   local m=${1-master}
   echo "$m"
