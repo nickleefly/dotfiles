@@ -9,4 +9,3 @@ export HISTCONTROL=ignoreboth:erasedups
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.14/libexec/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
