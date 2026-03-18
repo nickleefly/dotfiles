@@ -26,13 +26,8 @@ export PATH=/usr/local/go/bin:$PATH
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/go
 export GOBIN=$HOME/go/bin
-export PATH=$GOPATH/bin:$PATH
-export PATH=$GOROOT/bin:$PATH
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # Terraform & Packer Paths.
 export PATH=~/terraform:~/packer:$PATH
-export PATH=~/.emacs.d/bin:$PATH
 export PATH="~/.local/bin:$PATH"
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin

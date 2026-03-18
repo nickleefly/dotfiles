@@ -58,10 +58,8 @@ casks=(
   google-chrome-canary
   google-cloud-sdk
   go2shell
-  macdown
-  sublime-text
   visual-studio-code
-  spectacle
+  rectangle
   alfred
   flux
 )

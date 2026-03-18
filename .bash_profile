@@ -13,3 +13,7 @@ if type gdircolors > /dev/null 2>&1; then
 fi
 [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

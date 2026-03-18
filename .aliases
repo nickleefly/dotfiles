@@ -96,3 +96,5 @@ alias emptytrash="find $HOME/.Trash -not -path $HOME/.Trash -exec rm -rf {} \; 2
 
 alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
 alias sshhosts="grep -w -i "Host" ~/.ssh/config | sed 's/Host//'"
+
+alias k="kubectl"
