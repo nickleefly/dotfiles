@@ -15,11 +15,7 @@ path_add() {
 path_add "$HOME/local/bin"
 path_add "$HOME/bin"
 path_add "/usr/local/bin"
-path_add "/opt/homebrew/bin"
-path_add "$HOME/.n/bin"
-path_add "$HOME/npm-global/bin"
-path_add "$ANDROID_HOME/tools"
-path_add "$ANDROID_HOME/platform-tools"
+path_add "$HOME/.local/bin"
 
 # Mac specific adjustments
 export COPYFILE_DISABLE=true

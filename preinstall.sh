@@ -91,9 +91,6 @@ esac
 brew cleanup
 brew cask cleanup
 
-# Install shell extensions
-ln -s "/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl" ~/bin/subl
-
 npmglobals=(
   npx
   beefy

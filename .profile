@@ -12,11 +12,15 @@ if [ -n "$BASH_VERSION" ]; then
 	[ -f ~/.extra.bashrc ] && . ~/.extra.bashrc
 fi
 
-
 _Z_NO_PROMPT_COMMAND=1
 . ~/z/z.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# here's LS_COLORS
+# github.com/trapd00r/LS_COLORS
+command -v gdircolors >/dev/null 2>&1 || alias gdircolors="dircolors"
+eval "$(gdircolors -b ~/.dircolors)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # 加载 nvm

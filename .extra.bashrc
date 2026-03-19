@@ -64,15 +64,10 @@ __set_path () {
       orig=${orig/ $i / }
     fi
   done
-  for i in $orig; do
-    if ! [ -d $i ]; then
-      orig=${orig/ $i / }
-    fi
-  done
   # put the original at the front, but only the ones that aren't already present
   # This preserves the intended ordering, and allows env hijacking tricks like
   # nave and other subshell programs use.
-  # p="$orig $p"
+  p="$orig $p"
   export $var=$(p=$(echo $p); echo ${p// /:})
 #echo 'sp 1  ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
 }
@@ -96,7 +91,7 @@ __form_paths () {
 
 # homebrew="$HOME/.homebrew"
 local homebrew="/usr/local"
-__set_path PATH "$HOME/bin::$homebrew/share/npm/bin:$(__form_paths bin sbin nodejs/bin libexec include):/usr/local/nginx/sbin:/usr/X11R6/bin:/usr/local/mysql/bin:/usr/X11R6/include:$HOME/Library/Application Support/TextMate/Support/bin"
+__set_path PATH "$HOME/bin::$homebrew/share/npm/bin:$(__form_paths bin sbin nodejs/bin libexec include)"
 
 unset LD_LIBRARY_PATH
 __set_path PKG_CONFIG_PATH "$(__form_paths lib/pkgconfig):/usr/X11/lib/pkgconfig:/opt/gnome-2.14/lib/pkgconfig"
