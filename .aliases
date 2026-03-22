@@ -86,7 +86,7 @@ alias update_brew_npm='brew_update; npm install npm -g; npm update -g'
 
 # force tmux to use 256 colors
 alias tmux='tmux -2'
-alias fuckit='git commit -am "$(curl -s http://www.whatthecommit.com/index.txt )"'
+alias fuckit='git commit -am "$(curl -sL http://whatthecommit.com/index.txt )"'
 
 #make tree a little cooler looking.
 alias tree="tree -CFa -I 'rhel.*.*.package|.git' --dirsfirst"

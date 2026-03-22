@@ -27,6 +27,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Go (Homebrew) - GOROOT auto-detected by go command
+export GOROOT=$(brew --prefix go)/libexec
 export GOPATH=$HOME/go
 export GOBIN=$HOME/go/bin
 export PATH=/opt/homebrew/opt/go/bin:$GOPATH/bin:$PATH
