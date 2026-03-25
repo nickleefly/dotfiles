@@ -12,8 +12,7 @@ if [ -n "$BASH_VERSION" ]; then
 	[ -f ~/.extra.bashrc ] && . ~/.extra.bashrc
 fi
 
-_Z_NO_PROMPT_COMMAND=1
-. ~/z/z.sh
+eval "$(zoxide init bash)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

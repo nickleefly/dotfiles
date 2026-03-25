@@ -68,18 +68,17 @@ age / (1000 * 60 * 60 * 24 * 365.25)
 JS
 }
 
-unalias z 2> /dev/null
+# zoxide + fzf integration
 z() {
   if [[ -z "$*" ]]; then
-    cd "$(_z -l 2>&1 | fzf --height 40% +s --tac | sed 's/^[0-9,.]* *//')"
+    cd "$(zoxide query -l | fzf --height 40% +s --tac)"
   else
-    _last_z_args="$@"
-    _z "$@"
+    zoxide query "$@" && cd "$(zoxide query "$@")" || zoxide add "$@"
   fi
 }
 
 zz() {
-  cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q "$_last_z_args")"
+  cd "$(zoxide query -l | fzf -q "$*")"
 }
 alias j=z
 alias jj=zz

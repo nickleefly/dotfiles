@@ -92,26 +92,17 @@ brew cleanup
 brew cask cleanup
 
 npmglobals=(
-  npx
-  beefy
-  browserify
   http-server
   json
   rimraf
-  standard
-  vmd
   trash-cli
   mkdirp
   alfred-npms
   uglify-js
   serve
-  dat
   standard
   node-gyp
   nave
-  n
-  node-static
-  npm-check
   git-open
 )
 
