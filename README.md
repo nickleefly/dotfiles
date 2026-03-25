@@ -52,5 +52,11 @@ To get the most out of these dotfiles, I recommend installing the following mode
 On macOS, you can install them via Homebrew:
 
 ```bash
-brew install zoxide eza bat ripgrep fd fzf starship television
+brew install zoxide eza bat ripgrep fd fzf starship television reattach-to-user-namespace
+brew install --cask alfred
+brew install --cask rectangle
+brew install --cask raycast
+npm i -g trash-cli
+npm i -g js-beautify
+npm i -g
 ```
