@@ -73,6 +73,7 @@ alias meak="make"
 alias meak="make"
 
 alias ag='ag -f --hidde'
+alias rg='rg --hidden --glob "!.git/*"'
 
 # Shortcuts
 alias v="vim"

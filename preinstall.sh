@@ -32,7 +32,8 @@ tap "caskroom/versions"
 
 # Unix
 brew "universal-ctags", args: ["HEAD"]
-brew "ag"
+brew "the_silver_search"
+brew "fzf"
 brew "ripgrep"
 brew "git"
 brew "bash-completion@2"

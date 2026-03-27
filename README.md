@@ -58,5 +58,5 @@ brew install --cask rectangle
 brew install --cask raycast
 npm i -g trash-cli
 npm i -g js-beautify
-npm i -g
+npm i -g git-open
 ```
