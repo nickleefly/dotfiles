@@ -1,0 +1,32 @@
+command = /bin/bash
+
+confirm-close-surface = "false"
+working-directory = home
+clipboard-read = allow
+clipboard-write = allow
+copy-on-select = clipboard
+background-opacity = 0.9
+window-height = 24
+window-width = 80
+theme = Apple System Colors
+background = #1e1e1e
+selection-background = #3f638b
+selection-foreground = #ffffff
+cursor-color = #98989d
+font-size = 18
+font-thicken = true
+font-family = "TX-02 Retina"
+macos-titlebar-style = native
+auto-update-channel = stable
+
+keybind = super+physical:one=goto_tab:1
+keybind = super+physical:two=goto_tab:2
+keybind = super+physical:three=goto_tab:3
+keybind = super+physical:four=goto_tab:4
+keybind = super+physical:five=goto_tab:5
+keybind = super+physical:six=goto_tab:6
+keybind = super+physical:seven=goto_tab:7
+keybind = super+physical:eight=goto_tab:8
+keybind = super+physical:nine=goto_tab:9
+
+macos-option-as-alt = true
