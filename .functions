@@ -82,6 +82,7 @@ zz() {
 }
 alias j=z
 alias jj=zz
+alias zl="zoxide query --list"
 
 cd_with_fzf() {
   cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)" && clear
