@@ -478,45 +478,13 @@ macs () {
 #echo '850   ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
 
 # set the bash prompt and the title function
-
-if command -v starship &> /dev/null; then
-  eval "$(starship init bash)"
-elif [ "$PROMPT_COMMAND" = "" ] || [ "$PROMPT_COMMAND" = "__prompt" ]; then
-  __prompt () {
-    echo -ne "\033[m";history -a
-    echo ""
-    [ -d .git ] && git stash list
-    if [ $SHLVL -gt 1 ]; then
-      { local i=$SHLVL; while [ $i -gt 1 ]; do echo -n '.'; let i--; done; }
-    fi
-
-    # Manually load z here, after $? is checked, to keep $? from being clobbered.
-    [[ "$(type -t _z)" ]] && _z --add "$(pwd -P 2>/dev/null)" 2>/dev/null
-
-    local DIR=${PWD/$HOME/\~}
-    local HOST=${HOSTNAME:-$(uname -n)}
-    HOST=${HOST%.local}
-    echo -ne "\033]0;$(__git_ps1 "%s - " 2>/dev/null)host $HOST : dir$DIR\007"
-    # echo -ne "$(__git_ps1 "%s " 2>/dev/null)"
-    echo -ne "$(__git_ps1 "\033[41;31m[\033[41;37m%s\033[41;31m]\033[0m" 2>/dev/null)"
-    echo -ne "\033[44;37mOSX\033[0m:$DIR"
-    # echo -ne "$USER@$HOST:$DIR"
-    if [ "$NAVE" != "" ]; then echo -ne " \033[44m\033[37mnode$NAVE\033[0m"
-    else echo -ne " \033[32mnode$(node -v 2>/dev/null)\033[0m"
-    fi
-  }
-  export PROMPT_COMMAND='__prompt'
-fi
+# NOTE: This block must live OUTSIDE main() so __prompt is defined at top-level scope.
+# Inside a function, __prompt would go out of scope when main() returns, causing
+# "bash: __prompt: command not found" on every prompt.
 
 #this part gets repeated when you tab to see options
 #PROMPT_COMMAND=
 PS1="\n\\$ "
-
-pres () {
-  export PROMPT_COMMAND=''
-  PS1='\n$ '
-  clear
-}
 
 #echo '900   ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
 # view processes.
@@ -555,3 +523,37 @@ return 0
 main
 #echo 'main 1' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
 unset main
+
+# Prompt setup (must be at top-level scope, not inside main())
+if [ "$(type -t __prompt 2>/dev/null)" != "function" ]; then
+  __prompt () {
+    echo -ne "\033[m";history -a
+    echo ""
+    [ -d .git ] && git stash list
+    if [ $SHLVL -gt 1 ]; then
+      { local i=$SHLVL; while [ $i -gt 1 ]; do echo -n '.'; let i--; done; }
+    fi
+
+    # Manually load z here, after $? is checked, to keep $? from being clobbered.
+    [[ "$(type -t _z)" ]] && _z --add "$(pwd -P 2>/dev/null)" 2>/dev/null
+
+    local DIR=${PWD/$HOME/\~}
+    local HOST=${HOSTNAME:-$(uname -n)}
+    HOST=${HOST%.local}
+    echo -ne "\033]0;$(__git_ps1 "%s - " 2>/dev/null)host $HOST : dir$DIR\007"
+    # echo -ne "$(__git_ps1 "%s " 2>/dev/null)"
+    echo -ne "$(__git_ps1 "\033[41;31m[\033[41;37m%s\033[41;31m]\033[0m" 2>/dev/null)"
+    echo -ne "\033[44;37mOSX\033[0m:$DIR"
+    # echo -ne "$USER@$HOST:$DIR"
+    if [ "$NAVE" != "" ]; then echo -ne " \033[44m\033[37mnode$NAVE\033[0m"
+    else echo -ne " \033[32mnode$(node -v 2>/dev/null)\033[0m"
+    fi
+  }
+  export PROMPT_COMMAND='__prompt'
+fi
+
+pres () {
+  export PROMPT_COMMAND=''
+  PS1='\n$ '
+  clear
+}
