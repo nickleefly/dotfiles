@@ -33,3 +33,6 @@ export PATH=/opt/homebrew/opt/go/bin:$GOPATH/bin:$PATH
 
 # Terraform & Packer Paths.
 export PATH=~/terraform:~/packer:$PATH
+
+export GOOGLE_CLOUD_PROJECT="nickleefly-mad-science"
+export GEMINI_MODEL="gemini-3.1-pro-preview"

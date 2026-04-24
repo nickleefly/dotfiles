@@ -3,6 +3,11 @@
   name = Xiuyu Li
   email = nickleefly@gmail.com
   signingkey = 36FC059D941CEA6D
+[includeIf "gitdir/i:/Users/nick/Documents/work/"]
+    path = ~/.gitconfig-work
+
+[includeIf "gitdir/i:/Users/nick/Documents/personal/"]
+    path = ~/.gitconfig-personal
 [github]
   user = nickleefly
 [alias]
@@ -79,3 +84,8 @@
   program = /usr/local/bin/gpg
 [fetch]
   prune = true
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
