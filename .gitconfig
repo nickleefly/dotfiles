@@ -76,10 +76,17 @@
   tool = vimdiff
 [merge]
   tool = vimdiff
+  conflictStyle = zdiff3
 [push]
   default = current
 [core]
   excludesfile = ~/.gitignore
+  pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true      # or light = true, or omit for auto-detection
 [gpg]
   program = /usr/local/bin/gpg
 [fetch]
