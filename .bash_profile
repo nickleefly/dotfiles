@@ -12,3 +12,4 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
