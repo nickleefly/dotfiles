@@ -31,6 +31,9 @@ _claude_init_profile() {
 
 # Enhanced Claude Profile Switcher
 claude() {
+    # If first arg is a flag (starts with -), passthrough directly
+    [[ "$1" == -* ]] && { command claude "$@"; return; }
+
     local profile="${1:-default}" # Default to 'default' if no argument
 
     # Map friendly names to directories
