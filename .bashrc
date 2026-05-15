@@ -10,47 +10,30 @@ export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.14/libexec/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 
-# Sync shared resources once for profile dirs
-_claude_init_profile() {
-    local target_dir="$1"
-    # Skip if already initialized (check for plugins symlink)
-    [ -L "$target_dir/plugins" ] && return 0
-
-    mkdir -p "$target_dir"
-
-    # List of things to sync from the main ~/.claude
-    # Note: settings.json, keybindings.json, CLAUDE.md, and history should be per-instance
-    local items=("plugins" "agents" "mcp" "skills" "rules" "RTK.md")
-
-    for item in "${items[@]}"; do
-        if [ -e "$HOME/.claude/$item" ]; then
-            ln -sfn "$HOME/.claude/$item" "$target_dir/$item"
-        fi
-    done
-}
-
-# Enhanced Claude Profile Switcher
+# Enhanced Claude - resume latest session (uses default settings.json)
 claude() {
-    # If first arg is a flag (starts with -), passthrough directly
-    [[ "$1" == -* ]] && { command claude "$@"; return; }
+    local config_dir="$HOME/.claude"
+    local resume_args=()
 
-    local profile="${1:-default}" # Default to 'default' if no argument
+    # Find most recent session to resume
+    local sessions_dir="$config_dir/sessions"
+    if [[ -d "$sessions_dir" ]]; then
+        local latest_session=$(find "$sessions_dir" -maxdepth 1 -type d -name "sess_*" ! -name "*-backup" -printf '%T@ %p\n' 2>/dev/null | sort -rn | head -1 | cut -d' ' -f2-)
+        if [[ -n "$latest_session" ]]; then
+            local session_id=$(basename "$latest_session")
+            resume_args=(--resume "$session_id")
+        fi
+    fi
 
-    # Map friendly names to directories
-    case "$profile" in
-        internal|in)
-            export CLAUDE_CONFIG_DIR="$HOME/.claude-internal"
-            _claude_init_profile "$CLAUDE_CONFIG_DIR"
-            ;;
-        official|off)
-            export CLAUDE_CONFIG_DIR="$HOME/.claude-official"
-            _claude_init_profile "$CLAUDE_CONFIG_DIR"
-            ;;
-        *)
-            export CLAUDE_CONFIG_DIR="$HOME/.claude"
-            ;;
-    esac
-
-    echo "Using Claude Profile: $profile ($CLAUDE_CONFIG_DIR)"
-    command claude "${@:2}" # Pass all remaining arguments to the real claude command
+    [[ ${#resume_args[@]} -gt 0 ]] && echo "Resuming: ${resume_args[1]}"
+    command claude "${resume_args[@]}" "$@"
 }
+
+# Claude Model Switcher
+claude-glm() { ~/.claude/claude-with-model.sh glm; }
+claude-official() { ~/.claude/claude-with-model.sh official; }
+claude-llama-local() { ~/.claude/claude-with-model.sh llama-local; }
+claude-llama-cesarsal1nas() { ~/.claude/claude-with-model.sh llama-cesarsal1nas; }
+claude-llama-unsloth-qwen() { ~/.claude/claude-with-model.sh llama-unsloth-qwen; }
+claude-ollama() { ~/.claude/claude-with-model.sh ollama; }
+claude-openrouter() { ~/.claude/claude-with-model.sh openrouter; }
