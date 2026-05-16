@@ -33,7 +33,7 @@ claude() {
 ccg() { ~/.claude/claude-with-model.sh glm; }
 cco() { ~/.claude/claude-with-model.sh official; }
 cll() { ~/.claude/claude-with-model.sh llama-local; }
-clc() { ~/.claude/claude-with-model.sh llama-huihui; }
+clh() { ~/.claude/claude-with-model.sh llama-huihui; }
 clu() { ~/.claude/claude-with-model.sh llama-unsloth-qwen; }
 col() { ~/.claude/claude-with-model.sh ollama; }
 cor() { ~/.claude/claude-with-model.sh openrouter; }
