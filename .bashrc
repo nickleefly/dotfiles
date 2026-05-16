@@ -30,10 +30,10 @@ claude() {
 }
 
 # Claude Model Switcher
-claude-glm() { ~/.claude/claude-with-model.sh glm; }
-claude-official() { ~/.claude/claude-with-model.sh official; }
-claude-llama-local() { ~/.claude/claude-with-model.sh llama-local; }
-claude-llama-cesarsal1nas() { ~/.claude/claude-with-model.sh llama-cesarsal1nas; }
-claude-llama-unsloth-qwen() { ~/.claude/claude-with-model.sh llama-unsloth-qwen; }
-claude-ollama() { ~/.claude/claude-with-model.sh ollama; }
-claude-openrouter() { ~/.claude/claude-with-model.sh openrouter; }
+ccg() { ~/.claude/claude-with-model.sh glm; }
+cco() { ~/.claude/claude-with-model.sh official; }
+cll() { ~/.claude/claude-with-model.sh llama-local; }
+clc() { ~/.claude/claude-with-model.sh llama-cesarsal1nas; }
+clu() { ~/.claude/claude-with-model.sh llama-unsloth-qwen; }
+col() { ~/.claude/claude-with-model.sh ollama; }
+cor() { ~/.claude/claude-with-model.sh openrouter; }
