@@ -8,7 +8,7 @@ export HISTFILESIZE=1000000000
 export HISTCONTROL=ignoreboth:erasedups
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.14/libexec/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:/opt/homebrew/bin:$PATH"
 
 # Enhanced Claude - resume latest session (uses default settings.json)
 claude() {
