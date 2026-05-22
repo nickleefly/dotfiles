@@ -1,96 +1,105 @@
 [user]
-  # you probably want to change this bit.
-  name = Xiuyu Li
-  email = nickleefly@gmail.com
-  signingkey = 36FC059D941CEA6D
+	name = Xiuyu Li
+	email = nickleefly@gmail.com
+	signingkey = 36FC059D941CEA6D
+
 [includeIf "gitdir/i:/Users/nick/Documents/work/"]
-    path = ~/.gitconfig-work
+	path = ~/.gitconfig-work
 
 [includeIf "gitdir/i:/Users/nick/Documents/personal/"]
-    path = ~/.gitconfig-personal
+	path = ~/.gitconfig-personal
+
 [github]
-  user = nickleefly
+	user = nickleefly
+
 [alias]
-  ci = commit
-  st = status
-  br = branch
-  co = checkout
-  cp = cherry-pick
-  df = diff
-  ps = push
-  pl = pull
-  pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
-  cl = log --graph --pretty=format:'%h%d %s (%an)'
-  lo = log --oneline
-  lc = log --first-parent --pretty=format:'%s'
-  dc = diff --cached
-  lp = log -p
-  ln = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%an%d%Creset %s %b %Cgreen(%cr)%Creset' --date=relative
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-  lol = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  lola = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
-  showtagbydate = log --tags --simplify-by-decoration --pretty='format:%ai %d'
-  tagcommit = !sh -c 'git rev-list $0 | head -n 1'
-  uncommit = reset --soft HEAD^
-  unstage = reset HEAD
-  back = reset HEAD^ --hard
-  age=!echo "First commit:" && git log --reverse --pretty=format:'\t\t%ar' | head -n 1 && echo 'Last commit:' && git log --pretty=format:'\t\t%ar' | head -n 1
-  ff = merge --ff-only
-  ls = ls-files
-  ra = "!f() { git remote add $1 https://github.com/$2.git; }; f"
+	ci = commit
+	st = status
+	br = branch
+	co = checkout
+	cp = cherry-pick
+	df = diff
+	ps = push
+	pl = pull
+	pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
+	cl = log --graph --pretty=format:'%h%d %s (%an)'
+	lo = log --oneline
+	lc = log --first-parent --pretty=format:'%s'
+	dc = diff --cached
+	lp = log -p
+	ln = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%an%d%Creset %s %b %Cgreen(%cr)%Creset' --date=relative
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+	lol = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lola = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+	showtagbydate = log --tags --simplify-by-decoration --pretty='format:%ai %d'
+	tagcommit = !sh -c 'git rev-list $0 | head -n 1'
+	uncommit = reset --soft HEAD^
+	unstage = reset HEAD
+	back = reset HEAD^ --hard
+	age = !"echo \"First commit:\" && git log --reverse --pretty=format:'\\t\\t%ar' | head -n 1 && echo 'Last commit:' && git log --pretty=format:'\\t\\t%ar' | head -n 1"
+	ff = merge --ff-only
+	ls = ls-files
+	ra = "!f() { git remote add $1 https://github.com/$2.git; }; f"
+	pup = !"git pull upstream master && git push"
+	fff = !"git fetch && git ff $1"
+	ign = ls-files -o -i --exclude-standard
+	pullsub = submodule foreach git pull
 
-  ; Regular pull/push from upstream repositories
-  pup = "!git pull upstream master && git push"
+[branch "master"]
+	mergeoptions = log
 
-  ; Shortcut for git fetch and ff
-  fff = "!git fetch && git ff $1"
-
-  ; Show files ignored by git
-  ign = ls-files -o -i --exclude-standard
-
-  ; Update all the submodules to the latest version
-  pullsub = submodule foreach git pull
-[branch.master]
-  mergeoptions = log
 [color]
-  grep = auto
-  branch = auto
-  diff = auto
-  status = auto
-  ui = true
+	grep = auto
+	branch = auto
+	diff = auto
+	status = auto
+	ui = true
+
 [color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
+	current = yellow reverse
+	local = yellow
+	remote = green
+
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
 [color "status"]
-  added = yellow
-  changed = green
+	added = yellow
+	changed = green
+
 [difftool]
-  prompt = false
+	prompt = false
+
 [diff]
-  tool = vimdiff
+	tool = vimdiff
+
 [merge]
-  tool = vimdiff
-  conflictStyle = zdiff3
+	tool = vimdiff
+	conflictStyle = zdiff3
+
 [push]
-  default = current
+	default = current
+
 [core]
-  excludesfile = ~/.gitignore
-  pager = delta
+	excludesfile = ~/.gitignore
+	pager = delta
+
 [interactive]
-    diffFilter = delta --color-only
+	diffFilter = delta --color-only
+
 [delta]
-    navigate = true  # use n and N to move between diff sections
-    dark = true      # or light = true, or omit for auto-detection
+	navigate = true
+	dark = true
+
 [gpg]
-  program = /opt/homebrew/bin/gpg
+	program = /opt/homebrew/bin/gpg
+
 [fetch]
-  prune = true
+	prune = true
+
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
