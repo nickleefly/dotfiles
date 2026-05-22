@@ -31,4 +31,19 @@ else
 	exit 1
 fi
 
+# Symlink bin/ scripts to ~/bin
+mkdir -p ~/bin
+for i in bin/*; do
+  if [ -e ~/bin/$(basename "$i") ]; then
+    cp ~/bin/$(basename "$i") ~/.dotfile_backup/$(basename "$i")
+    rm ~/bin/$(basename "$i")
+  fi
+  if ln -s $(pwd)/$i ~/bin/$(basename "$i"); then
+    echo "Linked: $i -> ~/bin/$(basename "$i")" > /dev/stderr
+  else
+    echo "Failed on $i" > /dev/stderr
+    exit 1
+  fi
+done
+
 exit 0
