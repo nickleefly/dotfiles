@@ -10,24 +10,8 @@ export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.14/libexec/bin:$PATH"
 export PATH="$HOME/.npm-global/bin:/opt/homebrew/bin:$PATH"
 
-# Enhanced Claude - resume latest session (uses default settings.json)
-claude() {
-    local config_dir="$HOME/.claude"
-    local resume_args=()
-
-    # Find most recent session to resume
-    local sessions_dir="$config_dir/sessions"
-    if [[ -d "$sessions_dir" ]]; then
-        local latest_session=$(find "$sessions_dir" -maxdepth 1 -type d -name "sess_*" ! -name "*-backup" -printf '%T@ %p\n' 2>/dev/null | sort -rn | head -1 | cut -d' ' -f2-)
-        if [[ -n "$latest_session" ]]; then
-            local session_id=$(basename "$latest_session")
-            resume_args=(--resume "$session_id")
-        fi
-    fi
-
-    [[ ${#resume_args[@]} -gt 0 ]] && echo "Resuming: ${resume_args[1]}"
-    command claude "${resume_args[@]}" "$@"
-}
+# Simple Claude wrapper - uses default settings.json
+claude() { command claude "$@"; }
 
 # Claude Model Switcher
 ccg() { ~/.claude/claude-with-model.sh glm; }

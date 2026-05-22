@@ -18,12 +18,7 @@ fi
 
 # I actually frequently forget this.
 age () {
-  node -p <<JS
-var now = Date.now()
-var born = new Date('1985-12-14T19:10:00.000Z').getTime()
-age = now - born
-age / (1000 * 60 * 60 * 24 * 365.25)
-JS
+  node -pe 'var ms = Date.now() - new Date("1985-12-14T19:10:00.000Z").getTime(); (ms / (1000 * 60 * 60 * 24 * 365.25)).toFixed(2)'
 }
 
 # try to avoid polluting the global namespace with lots of garbage.
