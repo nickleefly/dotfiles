@@ -14,58 +14,10 @@ if test ! $(which brew); then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-# Update homebrew recipes
-brew update
+# Install all brew packages from Brewfile
+brew bundle --file="$(dirname "$0")/Brewfile"
 
-formulas=(
-  reattach-to-user-namespace
-  bash
-  vim --override-system-vi
-)
-brew install ${formulas[@]}
-
-brew bundle --file=- <<EOF
-tap "homebrew/services"
-tap "universal-ctags/universal-ctags"
-tap "caskroom/cask"
-tap "caskroom/versions"
-
-# Unix
-brew "universal-ctags", args: ["HEAD"]
-brew "the_silver_search"
-brew "fzf"
-brew "ripgrep"
-brew "git"
-brew "bash-completion@2"
-brew "nodejs"
-brew "wget"
-brew "ipv6toolkit"
-brew "the_silver_searcher"
-brew "wifi-password"
-brew "tmux"
-brew "cmake"
-brew "emacs"
-brew "reattach-to-user-namespace"
-brew "git-extras"
-brew "youtube-dl"
-EOF
-
-brew install wireshark --with-qt
-casks=(
-  unicodechecker
-  dropbox
-  1password
-  google-chrome
-  google-chrome-canary
-  google-cloud-sdk
-  go2shell
-  visual-studio-code
-  rectangle
-  alfred
-  flux
-)
-brew cask install --appdir="/Applications" ${casks[@]}
-
+# Shell setup
 update_shell() {
   local shell_path;
   shell_path="$(which bash)"
@@ -89,9 +41,7 @@ case "$SHELL" in
     ;;
 esac
 
-brew cleanup
-brew cask cleanup
-
+# NPM global packages
 npmglobals=(
   http-server
   json

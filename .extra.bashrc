@@ -3,94 +3,17 @@
 # .extra.bashrc - Xiuyu's Bash Extras
 # This file is designed to be a drop-in for any machine that I log into.
 # Currently, that means it has to work under Darwin, Ubuntu, and yRHEL
-#
-# Per-platform includes at the bottom, but most functionality is included
-# in this file, and forked based on resource availability.
-#
-# Functions are preferred over shell scripts, because then there's just
-# a few files to rsync over to a new host for me to use it comfortably.
 ######
 main () {
-#echo 'start ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
 if [ "${BASH_EXTRAS_LOADED}" = "" ] && [ "$TERM_PROGRAM" != "DTerm" ] && [ "$PS1" != "" ]; then
   echo "loading bash extras..."
 fi
 
 # I actually frequently forget this.
+# (see also .functions for the node-free version)
 age () {
   node -pe 'var ms = Date.now() - new Date("1985-12-14T19:10:00.000Z").getTime(); (ms / (1000 * 60 * 60 * 24 * 365.25)).toFixed(2)'
 }
-
-# try to avoid polluting the global namespace with lots of garbage.
-# the *right* way to do this is to have everything inside functions,
-# and use the "local" keyword.  But that would take some work to
-# reorganize all my old messes.  So this is what I've got for now.
-__garbage_list=""
-__garbage () {
-  local i
-  if [ $# -eq 0 ]; then
-    for i in ${__garbage_list}; do
-      unset $i
-    done
-    unset __garbage_list
-  else
-    for i in "$@"; do
-      __garbage_list="${__garbage_list} $i"
-    done
-  fi
-}
-__garbage __garbage
-__garbage __set_path
-#echo '75    ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
-__set_path () {
-#echo 'sp 0  ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
-  local var="$1"
-  local orig=$(eval 'echo $'$var)
-  orig=" ${orig//:/ } "
-  local p="$2"
-
-  local path_elements=" ${p//:/ } "
-  p=""
-  local i
-  for i in $path_elements; do
-    if [ -d $i ]; then
-      p="$p $i "
-      # strip out from the original set.
-      orig=${orig/ $i / }
-    fi
-  done
-  # put the original at the front, but only the ones that aren't already present
-  # This preserves the intended ordering, and allows env hijacking tricks like
-  # nave and other subshell programs use.
-  p="$orig $p"
-  export $var=$(p=$(echo $p); echo ${p// /:})
-#echo 'sp 1  ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
-}
-
-__garbage __form_paths
-#echo '105   ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
-local path_roots=( $HOME/ $HOME/local/ /usr/local/ /opt/local/ /usr/ /opt/ / )
-__form_paths () {
-#echo 'fp 0  ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
-  local r p paths
-  paths=""
-  for r in "${path_roots[@]}"; do
-    for p in "$@"; do
-      paths="$paths:$r$p"
-    done
-  done
-  echo ${paths/:/} # remove the first :
-#echo 'fp 1  ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
-}
-#echo '119   ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
-
-# homebrew="$HOME/.homebrew"
-local homebrew="/usr/local"
-__set_path PATH "$HOME/bin::$homebrew/share/npm/bin:$(__form_paths bin sbin nodejs/bin libexec include)"
-
-unset LD_LIBRARY_PATH
-__set_path PKG_CONFIG_PATH "$(__form_paths lib/pkgconfig):/usr/X11/lib/pkgconfig:/opt/gnome-2.14/lib/pkgconfig"
-__set_path CDPATH ".:..:$HOME/dev/npm:$HOME/dev:$HOME/dev/js:$HOME"
 
 # Go up N directories
 goup() {
@@ -114,14 +37,12 @@ js () {
 }
 
 if ! [ -z "$BASH" ]; then
-  __garbage __shopt
   __shopt () {
     local i
     for i in "$@"; do
       shopt -s $i 2>/dev/null
     done
   }
-  # see http://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html#The-Shopt-Builtin
   __shopt \
     histappend histverify histreedit \
     cdspell expand_aliases cmdhist globasciiranges \
@@ -129,7 +50,6 @@ if ! [ -z "$BASH" ]; then
     checkhash extglob globstar extdebug dirspell
 fi
 
-#echo '250   ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
 export SVN_RSH=ssh
 export RSYNC_RSH=ssh
 export INPUTRC=$HOME/.inputrc
@@ -172,19 +92,7 @@ shebang () {
   return 0
 }
 
-local lscolor=""
-__garbage lscolor
-if [ "$TERM" != "dumb" ] && [ -f "$(which gdircolors 2>/dev/null)" ]; then
-  eval "$(gdircolors -b)"
-  lscolor=" --color=auto"
-fi
-local ls_cmd="ls$lscolor"
-alias ls='gls --color=auto'
 alias lsd='ls -l | grep "^d"' # only directories
-alias la="$ls_cmd -Fla"
-alias lah="$ls_cmd -Flah"
-alias lal="$ls_cmd -FLlash"
-alias ll="$ls_cmd -Flsh"
 alias alg="alias | grep"
 
 # domain sniffing
@@ -225,6 +133,25 @@ pushprof () {
   return $failures
 }
 
+gpa () {
+  git push --all "$@"
+}
+
+gpt () {
+  git push --tags "$@"
+}
+
+gps () {
+  gpa "$@"
+  gpt "$@"
+}
+
+# Look up any ref's sha, and also copy it for pasting into bugs and such
+gsh () {
+  local c="${1:-HEAD}"
+  git show --no-patch --pretty=%H "$c" | tee >(xargs echo -n | pbcopy)
+}
+
 grim () {
   local m=${1-master}
   echo "$m"
@@ -239,6 +166,61 @@ gam () {
   fi
 }
 
+gf () {
+  git fetch -a "$1"
+}
+
+# Open or create a GitHub remote repo and bind it as origin
+gho () {
+  local me
+  me="$(git config --get github.user)"
+  if [ -z "$me" ]; then
+    echo "Error: set your GitHub username first."
+    echo "Run: git config --global github.user \"your-username\""
+    return 1
+  fi
+
+  if ! command -v gh &> /dev/null; then
+    echo "Error: GitHub CLI (gh) not found."
+    echo "Install from https://cli.github.com and run 'gh auth login'."
+    return 1
+  fi
+
+  local name="${1:-${PWD##*/}}"
+  local repo="git@github.com:${me}/${name}.git"
+
+  echo "Checking if remote repo ${me}/${name} exists..."
+
+  if gh repo view "${me}/${name}" &> /dev/null; then
+    echo "Remote repo exists, binding..."
+    if ! git remote | grep -q "^origin$"; then
+      git remote add origin "$repo"
+    else
+      echo "Warning: origin remote already exists."
+    fi
+    echo "Fetching remote branches..."
+    git fetch --all origin
+  else
+    echo "Remote repo does not exist, creating..."
+
+    if [ ! -d ".git" ]; then
+      echo "Initializing local Git repo..."
+      git init
+    fi
+
+    # Create private repo, bind origin, and push
+    gh repo create "${me}/${name}" --private --source=. --remote=origin --push
+
+    if [ $? -eq 0 ]; then
+      echo "GitHub repo created and bound."
+    else
+      echo "Repo creation failed, check network or gh auth status."
+      return 1
+    fi
+  fi
+}
+
+# Open the GitHub URL for the current repo/branch in browser
 ghurl () {
   local r=${1:-"origin"}
   if [ "$r" == "browse" ]; then
@@ -256,6 +238,22 @@ ghurl () {
   open $o
 }
 
+# Add a GitHub user's fork as a remote and fetch
+ghadd () {
+  local me="$(git config --get github.user)"
+  [ "$me" == "" ] && echo "Set github.user git config first." && return 1
+  local mine="$( git config --get remote.origin.url )"
+  local repo="${mine/git@github.com:$me\//}"
+  local nick="$1"
+  local who="$2"
+  [ "$who" == "" ] && who="$nick"
+  [ "$who" == "" ] && ( echo "usage: ghadd [nick] <who>" >&2 ) && return 1
+  local theirs="git://github.com/$who/$repo"
+  git remote add "$nick" "$theirs"
+  git fetch -a "$nick"
+}
+
+# Checkout a PR by URL or number
 pr () {
   local url="$1"
   if [ "$url" == "" ] && type pbpaste &>/dev/null; then
@@ -302,70 +300,24 @@ pullup () {
   fi
 }
 
-ghadd () {
-  local me="$(git config --get github.user)"
-  [ "$me" == "" ] && echo "Please enter your github name as the github.user git config." && return 1
-  # like: "git@github.com:$me/$repo.git"
-  local mine="$( git config --get remote.origin.url )"
-  local repo="${mine/git@github.com:$me\//}"
-  local nick="$1"
-  local who="$2"
-  [ "$who" == "" ] && who="$nick"
-  [ "$who" == "" ] && ( echo "usage: ghadd [nick] <who>" >&2 ) && return 1
-  # eg: git://github.com/isaacs/jack.git
-  local theirs="git://github.com/$who/$repo"
-  git remote add "$nick" "$theirs"
-  git fetch -a "$nick"
+gv () {
+  local v=$(npm ls -pl | head -1 | awk -F: '{print $2}' | awk -F@ '{print $2}')
+  git ci -am $v && git tag -sm $v $v
 }
-
-#echo '504   ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
-nresolve () {
-  node -p 'require.resolve("'$1'")'
-}
-
-gho () {
-  local me="$(git config --get github.user)"
-  [ "$me" == "" ] && \
-    echo "Please enter your github name as the github.user git config." && \
-    return 1
-  # like: "git@github.com:$me/$repo.git"
-  local name="${1:-$(basename "$PWD")}"
-  local repo="git@github.com:$me/$name"
-  git remote add origin "$repo"
-  git fetch -a origin
-}
-
-gpa () {
-  git push --all "$@"
-}
-
-gpt () {
-  git push --tags "$@"
-}
-
-gps () {
-  gpa "$@"
-  gpt "$@"
-}
-
-# Look up any ref's sha, and also copy it for pasting into bugs and such
-# the echo -n bit is to remove the trailing \n
-gsh () {
-  local c="${1:-HEAD}"
-  git show --no-patch --pretty=%H "$c" | tee >(xargs echo -n | pbcopy)
-}
-
 
 travis () {
   cat > .travis.yml <<YML
 sudo: false
 language: node_js
 node_js:
-  - '0.10'
-  - '4'
-  - '5'
-  - '6'
+  - '18'
+  - '20'
+  - '22'
 YML
+}
+
+nresolve () {
+  node -p 'require.resolve("'$1'")'
 }
 
 npmgit () {
@@ -373,21 +325,8 @@ npmgit () {
   git clone $(npm view $name repository.url) $name
 }
 
-gf () {
-  git fetch -a "$1"
-}
-
-gv () {
-  local v=$(npm ls -pl | head -1 | awk -F: '{print $2}' | awk -F@ '{print $2}')
-  git ci -am $v && git tag -sm $v $v
-}
-
 nsp () {
   npm explore $1 -- git pull origin master
-}
-
-rmnpm () {
-  rm -rf /usr/local/{lib/,}{node_modules,node,bin,share/man}/{.npm/,}npm* ~/.npm
 }
 
 # I can't type
@@ -401,10 +340,8 @@ gi () {
 
 # a context-sensitive rebasing git pull.
 # usage:
-# ghadd someuser  # add the github remote account
 # git checkout somebranch
-# gpm someuser    # similar to "git pull someuser somebranch"
-# Remote branch is rebased, and local changes stashed and reapplied if possible.
+# gp someuser    # similar to "git pull someuser somebranch"
 
 gp () {
   local s
@@ -420,7 +357,6 @@ gp () {
   [ "$s" != "No local changes to save" ] && git stash pop
 }
 
-#echo '800   ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
 #get the ip address of a host easily.
 getip () {
   for each in "$@"; do
@@ -470,18 +406,12 @@ macs () {
   fi
   done
 }
-#echo '850   ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
 
 # set the bash prompt and the title function
 # NOTE: This block must live OUTSIDE main() so __prompt is defined at top-level scope.
-# Inside a function, __prompt would go out of scope when main() returns, causing
-# "bash: __prompt: command not found" on every prompt.
 
-#this part gets repeated when you tab to see options
-#PROMPT_COMMAND=
 PS1="\n\\$ "
 
-#echo '900   ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
 # view processes.
 alias processes="ps axMuc | egrep '^[a-zA-Z0-9]'"
 pg () {
@@ -501,22 +431,15 @@ calc () {
   echo "$expression" | bc
 }
 
-#echo '950   ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
-
 type git >&/dev/null && [ -f $HOME/.git-completion ] && . $HOME/.git-completion
 [ -f $HOME/.cd-completion ] && . $HOME/.cd-completion
 
 complete -cf sudo
 
-# call in the cleaner.
-__garbage
 export BASH_EXTRAS_LOADED=1
-#echo 'end   ' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
 return 0
 }
-#echo 'main 0' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
 main
-#echo 'main 1' $(/usr/local/bin/node -p 'Date.now()') >> ~/login_timing
 unset main
 
 # Prompt setup (must be at top-level scope, not inside main())
@@ -536,10 +459,8 @@ if [ "$(type -t __prompt 2>/dev/null)" != "function" ]; then
     local HOST=${HOSTNAME:-$(uname -n)}
     HOST=${HOST%.local}
     echo -ne "\033]0;$(__git_ps1 "%s - " 2>/dev/null)host $HOST : dir$DIR\007"
-    # echo -ne "$(__git_ps1 "%s " 2>/dev/null)"
     echo -ne "$(__git_ps1 "\033[41;31m[\033[41;37m%s\033[41;31m]\033[0m" 2>/dev/null)"
     echo -ne "\033[44;37mOSX\033[0m:$DIR"
-    # echo -ne "$USER@$HOST:$DIR"
     if [ "$NAVE" != "" ]; then echo -ne " \033[44m\033[37mnode$NAVE\033[0m"
     else echo -ne " \033[32mnode$(node -v 2>/dev/null)\033[0m"
     fi
