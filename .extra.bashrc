@@ -43,6 +43,7 @@ if ! [ -z "$BASH" ]; then
       shopt -s $i 2>/dev/null
     done
   }
+  # see http://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html#The-Shopt-Builtin
   __shopt \
     histappend histverify histreedit \
     cdspell expand_aliases cmdhist globasciiranges \
