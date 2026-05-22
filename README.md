@@ -1,13 +1,26 @@
-# Pre install
+# Installation
 
-```
+## 1. Install packages via Homebrew and npm
+
+```bash
 ./preinstall.sh
 ```
-# how to install
 
-```
+This installs:
+- All Homebrew packages and casks from `Brewfile` (via `brew bundle`)
+- Global npm packages
+
+## 2. Symlink dotfiles and bin scripts
+
+```bash
 ./install.sh
 ```
+
+This symlinks:
+- All `.*` config files to your home directory (backing up existing files)
+- All scripts in `bin/` to `~/bin/`
+
+---
 
 Released under the DWTFPL
 No rights reserved.
@@ -36,27 +49,19 @@ If you come up with something interesting or clever or make
 something work better, send me a pull request or drop a line
 to i at foo hack dot com.
 
-## Recommended Tools
+## Included Tools
 
-To get the most out of these dotfiles, I recommend installing the following modern CLI tools:
+See `Brewfile` for the full list of Homebrew packages and casks installed.
+Highlights include:
 
-- [zoxide](https://github.com/ajeetdsouza/zoxide) - A smarter cd command.
-- [eza](https://github.com/eza-community/eza) - A modern, maintained replacement for ls.
-- [bat](https://github.com/sharkdp/bat) - A cat clone with wings.
-- [ripgrep (rg)](https://github.com/BurntSushi/ripgrep) - A line-oriented search tool.
-- [fd](https://github.com/sharkdp/fd) - A simple, fast and user-friendly alternative to 'find'.
-- [fzf](https://github.com/junegunn/fzf) - A command-line fuzzy finder.
-- [starship](https://starship.rs/) - The minimal, blazing-fast, and infinitely customizable prompt for any shell.
-- [television (tv)](https://github.com/alexpasmantier/television) - A general purpose TUI for fuzzy selection.
-
-On macOS, you can install them via Homebrew:
-
-```bash
-brew install zoxide eza bat ripgrep fd fzf starship television reattach-to-user-namespace
-brew install --cask alfred
-brew install --cask rectangle
-brew install --cask raycast
-npm i -g trash-cli
-npm i -g js-beautify
-npm i -g git-open
-```
+- **zoxide** - A smarter cd command
+- **eza** - Modern replacement for ls
+- **bat** - A cat clone with syntax highlighting
+- **ripgrep (rg)** - Fast line-oriented search
+- **fd** - Fast, user-friendly find alternative
+- **fzf** - Command-line fuzzy finder
+- **lazygit** - Terminal UI for git
+- **delta** - Better git diff pager
+- **tmux** - Terminal multiplexer
+- **Rectangle** - Window management (cask)
+- **Raycast** - Command palette / launcher (cask)
