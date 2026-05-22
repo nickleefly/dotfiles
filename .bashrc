@@ -10,9 +10,6 @@ export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.14/libexec/bin:$PATH"
 export PATH="$HOME/.npm-global/bin:/opt/homebrew/bin:$PATH"
 
-# Simple Claude wrapper - uses default settings.json
-claude() { command claude "$@"; }
-
 # Claude Model Switcher
 ccg() { ~/.claude/claude-with-model.sh glm; }
 cco() { ~/.claude/claude-with-model.sh official; }
