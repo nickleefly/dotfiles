@@ -433,7 +433,6 @@ calc () {
 }
 
 type git >&/dev/null && [ -f $HOME/.git-completion ] && . $HOME/.git-completion
-[ -f $HOME/.cd-completion ] && . $HOME/.cd-completion
 
 complete -cf sudo
 
