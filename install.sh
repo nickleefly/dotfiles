@@ -9,10 +9,6 @@ IS_MACOS="$([ "$OS" = "Darwin" ] && echo "true" || echo "false")"
 # Symlink dotfiles
 for i in .*; do
   if ! [ "$i" == "." ] && ! [ "$i" == ".." ] && ! [ "$i" == ".git" ]; then
-    # Skip .ghostty-config on Linux
-    if [ "$i" == ".ghostty-config" ] && [ "$IS_MACOS" = "false" ]; then
-      continue
-    fi
     if [ -e ~/$i ]; then
       if ! ( cp ~/$i ~/.dotfile_backup/$i ) || ! ( rm ~/$i || unlink ~/$i ); then
         echo "Failed on $i" > /dev/stderr
@@ -28,9 +24,8 @@ for i in .*; do
   fi
 done
 
-# Ghostty: symlink config to ~/.config/ghostty/config (macOS only)
-if [ "$IS_MACOS" = "true" ]; then
-  mkdir -p ~/.config/ghostty
+# Ghostty: symlink config to ~/.config/ghostty/config
+mkdir -p ~/.config/ghostty
   if [ -e ~/.config/ghostty/config ]; then
     cp ~/.config/ghostty/config ~/.dotfile_backup/ghostty-config
     rm ~/.config/ghostty/config
@@ -41,7 +36,6 @@ if [ "$IS_MACOS" = "true" ]; then
     echo "Failed on ghostty config" > /dev/stderr
     exit 1
   fi
-fi
 
 # Symlink bin/ scripts to ~/bin
 mkdir -p ~/bin
