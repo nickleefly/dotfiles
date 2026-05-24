@@ -7,19 +7,27 @@ fancy_echo() {
   printf "\n$fmt\n" "$@"
 }
 
-# Check for Homebrew,
-# Install if we don't have it
+# Detect OS
+OS="$(uname)"
+IS_MACOS="$([ "$OS" = "Darwin" ] && echo "true" || echo "false")"
+
+# Check for Homebrew, install if we don't have it
+# Homebrew works on both macOS and Linux now
 if test ! $(which brew); then
   echo "Installing homebrew..."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  if [ "$IS_MACOS" = "true" ]; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  else
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
 fi
 
 # Install all brew packages from Brewfile
 brew bundle --file="$(dirname "$0")/Brewfile"
 
-# Shell setup
+# Shell setup (skip on Linux if using system bash)
 update_shell() {
-  local shell_path;
+  local shell_path
   shell_path="$(which bash)"
 
   fancy_echo "Changing your shell to bash ..."
@@ -30,16 +38,24 @@ update_shell() {
   sudo chsh -s "$shell_path" "$USER"
 }
 
-case "$SHELL" in
-  */bash)
-    if [ "$(which bash)" != '/usr/local/bin/bash' ] ; then
+# Only change shell on macOS, or on Linux if using Homebrew bash
+if [ "$IS_MACOS" = "true" ]; then
+  case "$SHELL" in
+    */bash)
+      if [ "$(which bash)" != '/usr/local/bin/bash' ] && [ "$(which bash)" != '/opt/homebrew/bin/bash' ]; then
+        update_shell
+      fi
+      ;;
+    *)
       update_shell
-    fi
-    ;;
-  *)
+      ;;
+  esac
+else
+  # On Linux, only update if using Homebrew bash
+  if [ "$(which bash)" = '*/homebrew/*' ]; then
     update_shell
-    ;;
-esac
+  fi
+fi
 
 # NPM global packages
 npmglobals=(
@@ -48,10 +64,14 @@ npmglobals=(
   rimraf
   trash-cli
   mkdirp
-  alfred-npms
   serve
   node-gyp
   git-open
 )
+
+# Add macOS-only npm packages
+if [ "$IS_MACOS" = "true" ]; then
+  npmglobals+=(alfred-npms)
+fi
 
 npm install -g ${npmglobals[@]}
