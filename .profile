@@ -19,10 +19,12 @@ eval "$(zoxide init bash)"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Go (Homebrew) - GOROOT auto-detected by go command
-export GOROOT=$(brew --prefix go)/libexec
+if command -v brew >/dev/null 2>&1 && brew --prefix go >/dev/null 2>&1; then
+  export GOROOT=$(brew --prefix go)/libexec
+  export PATH=$(brew --prefix go)/bin:$GOPATH/bin:$PATH
+fi
 export GOPATH=$HOME/go
 export GOBIN=$HOME/go/bin
-export PATH=/opt/homebrew/opt/go/bin:$GOPATH/bin:$PATH
 
 # Terraform & Packer Paths.
 export PATH=~/terraform:~/packer:$PATH

@@ -419,7 +419,10 @@ pg () {
   ps aux | grep "$@" | grep -v "$( echo grep "$@" )"
 }
 pga () {
-  ps aux | grep "$@" | grep -v "$( echo grep "$@" )" | grep -v '/Applications'
+  local filter="grep -v \"$( echo grep "$@" )\""
+  # Filter out /Applications on macOS
+  [ "$(uname)" = "Darwin" ] && filter="$filter | grep -v '/Applications'"
+  eval "ps aux | grep \"$@\" | $filter"
 }
 pid () {
   pg "$@" | awk '{print $2}'
@@ -458,9 +461,10 @@ if [ "$(type -t __prompt 2>/dev/null)" != "function" ]; then
     local DIR=${PWD/$HOME/\~}
     local HOST=${HOSTNAME:-$(uname -n)}
     HOST=${HOST%.local}
+    local OS_LABEL="$(uname)"
     echo -ne "\033]0;$(__git_ps1 "%s - " 2>/dev/null)host $HOST : dir$DIR\007"
     echo -ne "$(__git_ps1 "\033[41;31m[\033[41;37m%s\033[41;31m]\033[0m" 2>/dev/null)"
-    echo -ne "\033[44;37mOSX\033[0m:$DIR"
+    echo -ne "\033[44;37m$OS_LABEL\033[0m:$DIR"
     if [ "$NAVE" != "" ]; then echo -ne " \033[44m\033[37mnode$NAVE\033[0m"
     else echo -ne " \033[32mnode$(node -v 2>/dev/null)\033[0m"
     fi

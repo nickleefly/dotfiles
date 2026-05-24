@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# macOS-only defaults - skip on Linux
+if [ "$(uname)" != "Darwin" ]; then
+  echo "This script is for macOS only. Skipping."
+  exit 0
+fi
+
 # ~/.osx — http://mths.be/osx
 
 # Ask for the administrator password upfront
