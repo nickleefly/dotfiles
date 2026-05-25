@@ -12,6 +12,7 @@ export PATH="$HOME/.npm-global/bin:/opt/homebrew/bin:$PATH"
 
 # Claude Model Switcher
 ccg() { ~/.claude/claude-with-model.sh glm; }
-cco() { ~/.claude/claude-with-model.sh official; }
-cll() { ~/.claude/claude-with-model.sh llama-local; }
-cor() { ~/.claude/claude-with-model.sh openrouter; }
+ccd() { ~/.claude/claude-with-model.sh ds; }
+cco() { ~/.claude/claude-with-model.sh off; }
+cll() { ~/.claude/claude-with-model.sh ll; }
+cor() { ~/.claude/claude-with-model.sh or; }
