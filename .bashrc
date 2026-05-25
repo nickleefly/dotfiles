@@ -14,6 +14,4 @@ export PATH="$HOME/.npm-global/bin:/opt/homebrew/bin:$PATH"
 ccg() { ~/.claude/claude-with-model.sh glm; }
 cco() { ~/.claude/claude-with-model.sh official; }
 cll() { ~/.claude/claude-with-model.sh llama-local; }
-clh() { ~/.claude/claude-with-model.sh llama-huihui; }
-clu() { ~/.claude/claude-with-model.sh llama-unsloth-qwen; }
 cor() { ~/.claude/claude-with-model.sh openrouter; }
