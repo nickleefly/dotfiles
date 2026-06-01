@@ -455,9 +455,6 @@ if [ "$(type -t __prompt 2>/dev/null)" != "function" ]; then
       { local i=$SHLVL; while [ $i -gt 1 ]; do echo -n '.'; let i--; done; }
     fi
 
-    # Manually load z here, after $? is checked, to keep $? from being clobbered.
-    [[ "$(type -t _z)" ]] && _z --add "$(pwd -P 2>/dev/null)" 2>/dev/null
-
     local DIR=${PWD/$HOME/\~}
     local HOST=${HOSTNAME:-$(uname -n)}
     HOST=${HOST%.local}
