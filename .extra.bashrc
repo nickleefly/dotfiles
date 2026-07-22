@@ -138,6 +138,10 @@ gpa () {
   git push --all "$@"
 }
 
+gpl () {
+  git pull "$@"
+}
+
 gpt () {
   git push --tags "$@"
 }
