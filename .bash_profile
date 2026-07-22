@@ -19,3 +19,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 if brew --prefix mysql-client >/dev/null 2>&1; then
   export PATH="$(brew --prefix mysql-client)/bin:$PATH"
 fi
+
+[[ -r ~/.bashrc ]] && source ~/.bashrc
