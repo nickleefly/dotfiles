@@ -14,3 +14,5 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 ccg() { ~/.claude/claude-with-model.sh glm; }
 ccd() { ~/.claude/claude-with-model.sh ds; }
 cco() { ~/.claude/claude-with-model.sh off; }
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
