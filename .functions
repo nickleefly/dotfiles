@@ -164,3 +164,50 @@ gcow() {
     git worktree add "$path" "$branch"
   fi && cd "$path"
 }
+
+# kx: switch kubectl context via fzf
+kx() {
+  local ctx
+  ctx="$(kubectl config get-contexts -o name | fzf)" || return
+  kubectl config use-context "$ctx"
+}
+
+# kn: switch namespace of the current kubectl context via fzf
+kn() {
+  local ns
+  ns="$(kubectl get namespaces -o name | sed 's|^namespace/||' | fzf)" || return
+  kubectl config set-context --current --namespace="$ns"
+}
+
+# kc: show current kubectl context / namespace
+kc() {
+  echo "$(kubectl config current-context) / $(kubectl config view --minify -o jsonpath='{..namespace}')"
+}
+
+# kl: tail logs of a pod picked via fzf (extra args passed to kubectl logs)
+kl() {
+  local p
+  p="$(kubectl get pods -o name | fzf)" || return
+  kubectl logs -f --tail=200 "$p" "$@"
+}
+
+# kex: open a shell in a pod picked via fzf
+kex() {
+  local p
+  p="$(kubectl get pods -o name | fzf)" || return
+  kubectl exec -it "$p" -- sh -c 'command -v bash >/dev/null && exec bash || exec sh'
+}
+
+# kd: describe a pod picked via fzf
+kd() {
+  local p
+  p="$(kubectl get pods -o name | fzf)" || return
+  kubectl describe "$p"
+}
+
+# ksec: print decoded values of a secret picked via fzf
+ksec() {
+  local s
+  s="$(kubectl get secrets -o name | fzf)" || return
+  kubectl get "$s" -o json | jq '.data | map_values(@base64d)'
+}

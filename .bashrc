@@ -16,3 +16,9 @@ ccd() { ~/.claude/claude-with-model.sh ds; }
 cco() { ~/.claude/claude-with-model.sh off; }
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# kubectl completion, also for the `k` alias
+if command -v kubectl >/dev/null; then
+  eval "$(kubectl completion bash)"
+  complete -o default -F __start_kubectl k
+fi
