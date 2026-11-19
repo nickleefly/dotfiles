@@ -28,6 +28,3 @@ export GOBIN=$HOME/go/bin
 
 # Terraform & Packer Paths.
 export PATH=~/terraform:~/packer:$PATH
-
-export GOOGLE_CLOUD_PROJECT="nickleefly-mad-science"
-export GEMINI_MODEL="gemini-3.1-pro-preview"
